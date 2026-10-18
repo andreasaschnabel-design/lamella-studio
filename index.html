@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111923">
-<title>LAMELLA Studio V10 · Maßstäbliche Raumwirkung</title>
+<title>LAMELLA Studio V11 · Live gestalten</title>
 <style>
 :root{--bg:#0b1119;--pane:#121b26;--pane2:#172230;--edge:#2b3a48;--text:#f0f3f4;--sub:#a6b5c4;--muted:#718495;--accent:#ffb55a;--accent2:#fa8f4c;--teal:#86dfcf;--bad:#ff8c8c;--sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -133,10 +133,65 @@ select,input[type=number]{background:#0c1520;color:var(--text);border:1px solid 
 .v10-hang-note{font-size:11px;color:#b0c5ce;line-height:1.5}
 @media(max-width:470px){.v10-room-size{font-size:9px;top:44px;left:8px;max-width:80%;padding:5px 8px}}
 
+/* LAMELLA Studio V11: Vorschau links dauerhaft sichtbar, Einstellungen rechts. */
+@media (min-width:901px) {
+ .app.layout-v8.layout-v11 {display:grid;grid-template-columns:minmax(405px,42%) minmax(0,1fr);gap:18px;align-items:start;max-width:1900px;padding:0 22px 24px}
+ .layout-v11 .main {display:flex;flex-direction:column;gap:12px;position:sticky;top:82px;height:calc(100dvh - 94px);min-height:510px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;margin:10px 0 0;padding:16px!important;border-radius:17px;scrollbar-width:thin;scrollbar-color:#405668 #13212a}
+ .layout-v11 .main>.eyebrow,.layout-v11 .main>#modelWrap,.layout-v11 .main>#cutWrap,.layout-v11 .main>#roomWrap,.layout-v11 .main>#busyIndicator {width:100%;grid-area:auto;flex-shrink:0}
+ .layout-v11 .main .modelwrap{height:clamp(315px,55vh,575px)!important;min-height:315px!important}
+ .layout-v11 .main #cutWrap{height:auto!important;min-height:340px!important}
+ .layout-v11 .main>.eyebrow{flex-wrap:wrap;gap:8px}
+ .layout-v11 .main>.eyebrow .tabbar button{padding:9px 12px}
+ .layout-v11 .settings-area{margin:10px 0 0;min-width:0}
+ .layout-v11 .settings-heading{padding:3px 3px 6px}
+ .layout-v11 .settings-heading .jump-preview{display:none}
+ .layout-v11 .settings-area>.editorwrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0 0 16px;align-items:start}
+ .layout-v11 .settings-area>.editorwrap>.subpanel{background:#14212d;padding:15px;min-width:0}
+ .layout-v11 .settings-area>.editorwrap .profile-svg{height:295px}
+ .layout-v11 .settings-area>#sceneOptions{display:block;width:100%;margin:0 0 16px;grid-column:auto;grid-row:auto}
+ .layout-v11 .settings-columns{display:block;columns:2 275px;column-gap:14px;column-fill:balance}
+ .layout-v11 .settings-columns>.panel{break-before:auto!important;break-inside:avoid;display:inline-block;margin-bottom:14px;padding:17px}
+}
+@media (min-width:901px) and (max-width:1240px){
+ .app.layout-v8.layout-v11{grid-template-columns:minmax(365px,44%) minmax(0,1fr);gap:12px;padding:0 12px 15px}
+ .layout-v11 .main{padding:12px!important}
+ .layout-v11 .settings-area>.editorwrap{grid-template-columns:1fr}
+ .layout-v11 .settings-columns{columns:1}
+ .layout-v11 .settings-area>#sceneOptions .v9-scenes-grid{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+ .app.layout-v8.layout-v11{display:flex;flex-direction:column;padding:0 12px 12px}
+ .layout-v11 .main{position:static;width:100%;height:auto;overflow:visible;display:flex;flex-direction:column;gap:10px;margin:12px 0;padding:14px}
+ .layout-v11 .main>.eyebrow,.layout-v11 .main>#modelWrap,.layout-v11 .main>#cutWrap,.layout-v11 .main>#roomWrap,.layout-v11 .main>#busyIndicator{width:100%}
+ .layout-v11 .main .modelwrap{height:390px;min-height:300px}
+ .layout-v11 .main #cutWrap{height:auto!important;min-height:290px!important}
+ .layout-v11 .settings-area{width:100%;margin:0}
+ .layout-v11 .settings-area>.editorwrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:12px}
+ .layout-v11 .settings-area>.editorwrap .subpanel{background:#14212d}
+ .layout-v11 .settings-area>#sceneOptions{display:block;width:100%;margin-bottom:12px}
+ .layout-v11 .settings-columns{columns:2 290px}
+ .layout-v11 .settings-columns>.panel{break-before:auto!important}
+ .layout-v11 .settings-heading .jump-preview{display:none}
+}
+@media(max-width:650px){
+ .layout-v11 .settings-area>.editorwrap{grid-template-columns:1fr}
+ .layout-v11 .settings-columns{columns:1;display:flex;flex-direction:column}
+ .layout-v11 .settings-columns>.panel{width:100%}
+ .layout-v11 .settings-area>#sceneOptions .v9-scenes-grid{grid-template-columns:1fr}
+}
+.lamella-mini-preview{display:none}
+@media(max-width:900px){
+ .lamella-mini-preview:not([hidden]){display:block;position:fixed;right:12px;bottom:max(14px,env(safe-area-inset-bottom));width:min(238px,58vw);z-index:19;padding:6px;border:1px solid #728496;background:#172532;box-shadow:0 12px 38px #000b;border-radius:13px;overflow:hidden}
+ .lamella-mini-head{display:flex;align-items:center;justify-content:space-between;gap:3px;padding:0 3px 5px;color:#f6c98b;font-size:10px;font-weight:800;letter-spacing:.03em}
+ .lamella-mini-head button{background:#263948;color:#e4f2f4;border:1px solid #516677;border-radius:7px;padding:5px 7px;font-size:11px;min-height:27px}
+ .lamella-mini-preview canvas{display:block;width:100%;height:auto;aspect-ratio:1.62;border-radius:8px;background:#1a2630}
+ .lamella-mini-cut svg{display:block;width:100%;height:auto;max-height:140px;background:#fafaf7;border-radius:6px}
+}
+@media(max-width:400px){.lamella-mini-preview:not([hidden]){width:185px}.lamella-mini-head button{font-size:10px;padding:4px 5px}}
 </style>
 </head>
 <body>
-<header><div class="brand"><div class="glyph">◖◗</div><div><div class="brandtitle">LAMELLA STUDIO</div><div class="brandsub">Stecklampen · Entwurf & Laserschnitt</div></div></div><div class="meta"><span class="pill">● V10 · Raummaßstab</span><span class="metaextra">Einheiten: Millimeter</span></div></header>
+<header><div class="brand"><div class="glyph">◖◗</div><div><div class="brandtitle">LAMELLA STUDIO</div><div class="brandsub">Stecklampen · Entwurf & Laserschnitt</div></div></div><div class="meta"><span class="pill">● V11 · Live-Ansicht</span><span class="metaextra">Einheiten: Millimeter</span></div></header>
 <div class="app layout-v8">
 <main class="main" id="arbeitsbereich">
 
@@ -228,7 +283,7 @@ const round=(x)=>Math.round(x*10000)/10000;
 function normalize(v){const o={...defaultState,...v}; for(const k of [...rangeFields,'bedW','bedH','socketHole','boltCircle','boltHoleDia']){o[k]=Number(o[k]);if(!Number.isFinite(o[k]))o[k]=defaultState[k]};o.ribWidth=clamp(o.ribWidth,15,100);if(!['outline','solid'].includes(o.ribMode))o.ribMode='outline';o.count=Math.round(clamp(o.count,8,48));o.dia=clamp(o.dia,180,800);o.height=clamp(o.height,80,650);o.inner=clamp(o.inner,40,130);o.alternate=clamp(o.alternate,60,95);o.thick=clamp(o.thick,2,8);o.clearance=clamp(o.clearance,0,.6);o.kerf=clamp(o.kerf,0,.4);o.joint=clamp(o.joint,16,36);o.ringWidth=clamp(o.ringWidth,20,42);o.spacing=clamp(o.spacing,1,25);o.socketHole=clamp(o.socketHole,10,70);o.boltCircle=clamp(o.boltCircle,36,120);o.boltHoleDia=clamp(o.boltHoleDia,2,8);o.mountHoles=[0,2,4].includes(+o.mountHoles)?+o.mountHoles:0;if(!['E14','E27','custom'].includes(o.socketType))o.socketType='E27';o.bedW=clamp(o.bedW,180,3000);o.bedH=clamp(o.bedH,180,2000);o.points=Array.isArray(o.points)&&o.points.length===5?o.points.map(x=>clamp(Number(x)||.15,.15,1)):[...defaultState.points];o.smooth=!!o.smooth; if(!(o.preset in presets))o.preset='glocke';if(!['same','alternate'].includes(o.variation))o.variation='same';if(!['dining','living','bedroom','loft'].includes(o.sceneRoom))o.sceneRoom='dining';if(!['clear','matte','filament','globe'].includes(o.bulb))o.bulb='clear';o.bulbW=[20,40,60,80,100].includes(+o.bulbW)?+o.bulbW:60;o.kelvin=[2200,2700,3000,4000].includes(+o.kelvin)?+o.kelvin:2700;o.phiGuides=!!o.phiGuides;o.hangOffset=clamp(Math.round((Number(o.hangOffset)||0)/25)*25,-250,250);return o}
 function save(){try{localStorage.setItem('lamella-studio-v1',JSON.stringify(S))}catch(e){}}
 function notify(msg){const e=$('toast');e.textContent=msg;e.classList.add('show');clearTimeout(notify.t);notify.t=setTimeout(()=>e.classList.remove('show'),3100)}
-function wireControls(){for(let k of [...rangeFields,'preset','variation','ribMode','material','bedW','bedH','socketType','socketHole','mountHoles','boltCircle','boltHoleDia']){const el=$(k);el.addEventListener(['bedW','bedH','socketHole','boltCircle','boltHoleDia'].includes(k)?'change':'input',()=>{if(k==='preset'){S.preset=el.value;if(presets[el.value]){S.points=[...presets[el.value]];if(el.value==='teller'){S.height=130;S.dia=Math.max(S.dia,400)}if(el.value==='zylinder'){S.height=340}}}else if(['variation','ribMode','material','socketType'].includes(k)){S[k]=el.value;if(k==='socketType'&&el.value!=='custom')S.socketHole=el.value==='E14'?28:40}else{S[k]=Number(el.value);if(k==='socketHole'&&((S.socketType==='E14'&&S[k]!==28)||(S.socketType==='E27'&&S[k]!==40)))S.socketType='custom'}S=normalize(S);scheduleRefresh()})} $('smooth').addEventListener('change',()=>{S.smooth=$('smooth').checked;refresh()});$('btnSave').addEventListener('click',()=>downloadText('LAMELLA_Projekt.json',JSON.stringify({app:'LAMELLA Studio',version:10,settings:S},null,2),'application/json'));$('btnLoad').addEventListener('click',()=>$('fileInput').click());$('fileInput').addEventListener('change',async(e)=>{const f=e.target.files?.[0];if(!f)return;try{const data=JSON.parse(await f.text());S=normalize(data.settings||data);refresh();notify('Projekt geladen')}catch(err){notify('Keine gültige Projektdatei')}e.target.value='' });
+function wireControls(){for(let k of [...rangeFields,'preset','variation','ribMode','material','bedW','bedH','socketType','socketHole','mountHoles','boltCircle','boltHoleDia']){const el=$(k);el.addEventListener(['bedW','bedH','socketHole','boltCircle','boltHoleDia'].includes(k)?'change':'input',()=>{if(k==='preset'){S.preset=el.value;if(presets[el.value]){S.points=[...presets[el.value]];if(el.value==='teller'){S.height=130;S.dia=Math.max(S.dia,400)}if(el.value==='zylinder'){S.height=340}}}else if(['variation','ribMode','material','socketType'].includes(k)){S[k]=el.value;if(k==='socketType'&&el.value!=='custom')S.socketHole=el.value==='E14'?28:40}else{S[k]=Number(el.value);if(k==='socketHole'&&((S.socketType==='E14'&&S[k]!==28)||(S.socketType==='E27'&&S[k]!==40)))S.socketType='custom'}S=normalize(S);scheduleRefresh()})} $('smooth').addEventListener('change',()=>{S.smooth=$('smooth').checked;refresh()});$('btnSave').addEventListener('click',()=>downloadText('LAMELLA_Projekt.json',JSON.stringify({app:'LAMELLA Studio',version:11,settings:S},null,2),'application/json'));$('btnLoad').addEventListener('click',()=>$('fileInput').click());$('fileInput').addEventListener('change',async(e)=>{const f=e.target.files?.[0];if(!f)return;try{const data=JSON.parse(await f.text());S=normalize(data.settings||data);refresh();notify('Projekt geladen')}catch(err){notify('Keine gültige Projektdatei')}e.target.value='' });
  $('tab3d').addEventListener('click',()=>setTab('3d'));$('tabRoom').addEventListener('click',()=>setTab('room'));$('tabCut').addEventListener('click',()=>setTab('cut'));
  $('resetView').onclick=()=>{view={yaw:.53,pitch:.27,zoom:1};draw3d()};$('zoomPlus').onclick=()=>{view.zoom=clamp(view.zoom*1.15,.55,2.4);draw3d()};$('zoomMinus').onclick=()=>{view.zoom=clamp(view.zoom/1.15,.55,2.4);draw3d()};
  const canvas=$('modelCanvas');let pointer=null;canvas.addEventListener('pointerdown',e=>{pointer={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!pointer||pointer.id!==e.pointerId)return;view.yaw+=(e.clientX-pointer.x)*.012;view.pitch=clamp(view.pitch+(e.clientY-pointer.y)*.006,-.8,1.05);pointer.x=e.clientX;pointer.y=e.clientY;draw3d()});canvas.addEventListener('pointerup',()=>pointer=null);canvas.addEventListener('pointercancel',()=>pointer=null);canvas.addEventListener('wheel',e=>{e.preventDefault();view.zoom=clamp(view.zoom*(e.deltaY>0?.93:1.07),.55,2.4);draw3d()},{passive:false});
@@ -526,7 +581,7 @@ function exportCurrent(type){if(!canExport())return;const file=`LAMELLA_Bogen_${
 const crcTab=(()=>{let t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xedb88320^(c>>>1):c>>>1;t.push(c>>>0)}return t})();
 function crc32(b){let c=0xffffffff;for(let v of b)c=crcTab[(c^v)&255]^(c>>>8);return(c^0xffffffff)>>>0}
 function zipArchive(files){const enc=new TextEncoder(),entries=[],local=[],central=[];let offset=0;function uint16(v){return[v&255,v>>>8&255]}function uint32(v){return[v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255]}for(let f of files){const name=enc.encode(f.name),data=enc.encode(f.content),crc=crc32(data);const a=new Uint8Array([...uint32(0x04034b50),...uint16(20),...uint16(0x0800),...uint16(0),...uint16(0),...uint16(0),...uint32(crc),...uint32(data.length),...uint32(data.length),...uint16(name.length),...uint16(0),...name]);local.push(a,data);const b=new Uint8Array([...uint32(0x02014b50),...uint16(20),...uint16(20),...uint16(0x0800),...uint16(0),...uint16(0),...uint16(0),...uint32(crc),...uint32(data.length),...uint32(data.length),...uint16(name.length),...uint16(0),...uint16(0),...uint16(0),...uint16(0),...uint32(0),...uint32(offset),...name]);central.push(b);offset+=a.length+data.length;entries.push(f.name)}const cdSize=central.reduce((a,b)=>a+b.length,0);const end=new Uint8Array([...uint32(0x06054b50),...uint16(0),...uint16(0),...uint16(files.length),...uint16(files.length),...uint32(cdSize),...uint32(offset),...uint16(0)]);return new Blob([...local,...central,end],{type:'application/zip'})}
-function exportZip(type){if(!canExport())return;const ext=type==='svg'?'svg':'dxf';const fs=sheets.map((_,i)=>({name:`LAMELLA_Bogen_${String(i+1).padStart(2,'0')}.${ext}`,content:type==='svg'?svgSheet(i,false):dxfSheet(i)}));fs.push({name:'FERTIGUNGSHINWEISE.txt',content:`LAMELLA Studio V6 | Fertigungsdaten\n${S.count} Lamellen | Ø maximal ${S.dia} mm | Höhe ${S.height} mm\nMaterial: ${S.material} | Materialstärke: ${S.thick} mm\nSchlitz im CAD: ${precis(slotWidth(),2)} mm | Steckspiel: ${S.clearance} mm | Schnittfuge: ${S.kerf} mm\nLamellenmodus: ${S.ribMode==='outline'?'Konturstreifen, radial '+S.ribWidth+' mm':'Vollflächig'}\nSteckringe: 2 Stück | oben mit integrierter Vier-Speichen-Nabe und Zentralbohrung, unten offen\nFassungsaufnahme: ${S.socketType} | Bohrung Durchmesser ${S.socketHole} mm | Schraubbohrungen ${S.mountHoles} Stk.\n${S.mountHoles?'Lochkreis '+S.boltCircle+' mm | Schraublochdurchmesser '+S.boltHoleDia+' mm\n':''}Lasertisch: ${S.bedW} x ${S.bedH} mm | ${sheets.length} Schnittbögen\nMindestabstand zwischen Teilen: ${S.spacing} mm | Konturbasiertes Nesting, 0°/90°/180°/270°\n\nACHTUNG: Die Bohrung ist nur eine Aufnahme für eine passende Fassung mit Klemmringen, keine geprüfte tragende Aufhängung. E14/E27 sind Richtwerte; Fassung, Gewinde und Gegenring nachmessen. 1:1-Abmessungen und Passungen zunächst mit Testschnitten überprüfen. Hitzebeständigkeit, elektrische Sicherheit, Brandverhalten und Tragfähigkeit müssen vor Nutzung durch Fachkundige geprüft werden.\n`});fs.push({name:'LAMELLA_Projekt.json',content:JSON.stringify({app:'LAMELLA Studio',version:10,settings:S},null,2)});downloadBlob(`LAMELLA_${ext.toUpperCase()}_${sheets.length}_Boegen.zip`,zipArchive(fs));notify(`ZIP mit ${sheets.length} ${ext.toUpperCase()}-Bögen erstellt`)}
+function exportZip(type){if(!canExport())return;const ext=type==='svg'?'svg':'dxf';const fs=sheets.map((_,i)=>({name:`LAMELLA_Bogen_${String(i+1).padStart(2,'0')}.${ext}`,content:type==='svg'?svgSheet(i,false):dxfSheet(i)}));fs.push({name:'FERTIGUNGSHINWEISE.txt',content:`LAMELLA Studio V6 | Fertigungsdaten\n${S.count} Lamellen | Ø maximal ${S.dia} mm | Höhe ${S.height} mm\nMaterial: ${S.material} | Materialstärke: ${S.thick} mm\nSchlitz im CAD: ${precis(slotWidth(),2)} mm | Steckspiel: ${S.clearance} mm | Schnittfuge: ${S.kerf} mm\nLamellenmodus: ${S.ribMode==='outline'?'Konturstreifen, radial '+S.ribWidth+' mm':'Vollflächig'}\nSteckringe: 2 Stück | oben mit integrierter Vier-Speichen-Nabe und Zentralbohrung, unten offen\nFassungsaufnahme: ${S.socketType} | Bohrung Durchmesser ${S.socketHole} mm | Schraubbohrungen ${S.mountHoles} Stk.\n${S.mountHoles?'Lochkreis '+S.boltCircle+' mm | Schraublochdurchmesser '+S.boltHoleDia+' mm\n':''}Lasertisch: ${S.bedW} x ${S.bedH} mm | ${sheets.length} Schnittbögen\nMindestabstand zwischen Teilen: ${S.spacing} mm | Konturbasiertes Nesting, 0°/90°/180°/270°\n\nACHTUNG: Die Bohrung ist nur eine Aufnahme für eine passende Fassung mit Klemmringen, keine geprüfte tragende Aufhängung. E14/E27 sind Richtwerte; Fassung, Gewinde und Gegenring nachmessen. 1:1-Abmessungen und Passungen zunächst mit Testschnitten überprüfen. Hitzebeständigkeit, elektrische Sicherheit, Brandverhalten und Tragfähigkeit müssen vor Nutzung durch Fachkundige geprüft werden.\n`});fs.push({name:'LAMELLA_Projekt.json',content:JSON.stringify({app:'LAMELLA Studio',version:11,settings:S},null,2)});downloadBlob(`LAMELLA_${ext.toUpperCase()}_${sheets.length}_Boegen.zip`,zipArchive(fs));notify(`ZIP mit ${sheets.length} ${ext.toUpperCase()}-Bögen erstellt`)}
 function canExport(){if(!sheets.length||issues.some(x=>x.error)){notify('Bitte erst die Hinweise zur Geometrie / Plattengröße beheben');return false}return true}
 function setTab(v){tab=v;$('modelWrap').classList.toggle('hidden',v!=='3d');$('roomWrap').classList.toggle('hidden',v!=='room');$('cutWrap').classList.toggle('hidden',v!=='cut');$('sceneOptions').hidden=v!=='room';$('tab3d').classList.toggle('active',v==='3d');$('tabRoom').classList.toggle('active',v==='room');$('tabCut').classList.toggle('active',v==='cut');if(v==='cut')renderSheetView();else if(v==='room')requestAnimationFrame(drawRoom);else requestAnimationFrame(draw3d)}
 function changeSheet(delta){sheetIndex=clamp(sheetIndex+delta,0,Math.max(0,sheets.length-1));renderSheetView()}
@@ -711,5 +766,56 @@ buildProfileSliders();wireControls();wirePhiAndScene();runtimeNotice();refresh()
 window.LAMELLA_TEST={getState:()=>JSON.parse(JSON.stringify(S)),setState:(value)=>{S=normalize({...S,...value});refresh()},slotWidth,radialOuter,radialInner,ringBase,ringOuter,ringInner,socketHubRadius,ringPart,makeParts,pack,svgSheet,dxfSheet,checkDesign,zipArchive,transformed,getSheets:()=>sheets,drawRoom, getActiveTab:()=>tab};
 })();
 </script>
-</body>
+<script>/* LAMELLA Studio V11 · Fixed live preview with responsive mobile mini preview. */
+(()=>{
+ 'use strict';
+ function init(){
+  const byId=id=>document.getElementById(id);
+  const app=document.querySelector('.app.layout-v8'),settings=byId('einstellungen');
+  const main=byId('arbeitsbereich'),editor=main?.querySelector('.editorwrap'),scene=byId('sceneOptions');
+  if(!app||!settings||!main||!editor||!scene)return;
+  app.classList.add('layout-v11');
+  settings.insertBefore(editor,settings.firstChild);
+  settings.insertBefore(scene,editor);
+  const heading=settings.querySelector('.settings-heading p');
+  if(heading)heading.textContent='Stelle die Regler rechts ein und sieh jede Änderung sofort links in der feststehenden Vorschau.';
+  const mini=document.createElement('aside');
+  mini.id='lamellaMiniPreview';mini.className='lamella-mini-preview';mini.hidden=true;
+  mini.setAttribute('aria-label','Mitlaufende Live-Vorschau');
+  mini.innerHTML='<div class="lamella-mini-head"><span id="lamellaMiniLabel">LIVE · 3D</span><button type="button" id="lamellaMiniExpand" aria-label="Große Vorschau öffnen">↗ Groß</button><button type="button" id="lamellaMiniClose" aria-label="Mini-Vorschau schließen">×</button></div><canvas id="lamellaMiniCanvas" width="400" height="240"></canvas><div id="lamellaMiniCut" class="lamella-mini-cut" hidden></div>';
+  document.body.appendChild(mini);
+  let dismissed=false,lastCut='';
+  const activeTab=()=>window.LAMELLA_TEST?.getActiveTab?.()||'3d';
+  const refresh=()=>{
+   const mobile=window.matchMedia('(max-width:900px)').matches;
+   const offscreen=main.getBoundingClientRect().bottom<90;
+   if(!offscreen)dismissed=false;
+   mini.hidden=!mobile||!offscreen||dismissed;
+   if(mini.hidden)return;
+   const tab=activeTab(),label=byId('lamellaMiniLabel'),canvas=byId('lamellaMiniCanvas'),cut=byId('lamellaMiniCut');
+   label.textContent=tab==='room'?'LIVE · RAUM':tab==='cut'?'LIVE · SCHNITT':'LIVE · 3D';
+   if(tab==='cut'){
+    canvas.hidden=true;cut.hidden=false;
+    const svg=byId('cutMain')?.innerHTML||'';
+    if(lastCut!==svg){cut.innerHTML=svg;lastCut=svg}
+    return;
+   }
+   cut.hidden=true;canvas.hidden=false;
+   const source=byId(tab==='room'?'roomCanvas':'modelCanvas');
+   if(!source||!source.width||!source.height)return;
+   const w=400,h=Math.round(w*source.height/source.width);
+   if(canvas.width!==w)canvas.width=w;
+   if(canvas.height!==h)canvas.height=h;
+   try{const ctx=canvas.getContext('2d');ctx.clearRect(0,0,w,h);ctx.drawImage(source,0,0,w,h)}catch(e){}
+  };
+  byId('lamellaMiniExpand').addEventListener('click',()=>main.scrollIntoView({behavior:'smooth',block:'start'}));
+  byId('lamellaMiniClose').addEventListener('click',()=>{dismissed=true;mini.hidden=true});
+  window.addEventListener('scroll',refresh,{passive:true});
+  window.addEventListener('resize',refresh,{passive:true});
+  window.setInterval(refresh,160);
+  refresh();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script></body>
 </html>
