@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111923">
-<title>LAMELLA Studio V8 · Optimiertes Layout</title>
+<title>LAMELLA Studio V9 · Raumwirkung & Goldener Schnitt</title>
 <style>
 :root{--bg:#0b1119;--pane:#121b26;--pane2:#172230;--edge:#2b3a48;--text:#f0f3f4;--sub:#a6b5c4;--muted:#718495;--accent:#ffb55a;--accent2:#fa8f4c;--teal:#86dfcf;--bad:#ff8c8c;--sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -91,17 +91,56 @@ select,input[type=number]{background:#0c1520;color:var(--text);border:1px solid 
  .layout-v8 .settings-columns>.panel:nth-child(7){order:6}
  .layout-v8 .settings-columns>.panel:nth-child(8){order:7}
 }
+
+/* V9 · Wohnraumszene, schnelle Lichtwahl, Proportionsassistent */
+@media (min-width:781px) and (max-width:1390px){.layout-v8 .main #roomWrap{height:min(66vw,690px);min-height:465px}}
+.v9-scene{display:flex;flex-direction:column;gap:11px;margin:0}
+.v9-scene canvas{display:block;width:100%;height:100%;background:#222a2e}
+.v9-room-note{position:absolute;right:13px;top:12px;padding:7px 10px;border-radius:9px;background:#10202bda;color:#f1dec1;font-size:11px;z-index:2;pointer-events:none}
+.v9-sceneopt{grid-column:1/-1;grid-row:3;background:#15222d;border:1px solid #354a59;border-radius:13px;padding:14px 17px;min-width:0}
+.v9-sceneopt[hidden]{display:none!important}
+.v9-sceneopt h3{font-size:14px;font-weight:750;margin:0 0 4px}
+.v9-sceneopt .desc{color:var(--sub);font-size:11px;margin:0 0 12px;line-height:1.4}
+.v9-scenes-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 21px}
+.v9-choice-title{font-size:11px;color:#c8d4dd;font-weight:720;margin-bottom:6px}
+.v9-chips{display:flex;flex-wrap:wrap;gap:7px}
+.v9-chip{padding:9px 12px;border:1px solid #445868;background:#223442;color:#dce8ee;font-size:12px;font-weight:700;border-radius:9px;min-height:35px}
+.v9-chip[aria-pressed=true]{background:#f5b566;color:#20262a;border-color:#ffd08f}
+.v9-chip:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.v9-footnote{margin:12px 0 0;color:#98b5c3;font-size:11px;line-height:1.5}
+.phi-box{background:linear-gradient(128deg,#2a2830,#1c2a33);border:1px solid #6c634e;border-radius:12px;padding:13px;margin:12px 0 4px}
+.phi-head{color:#f8cf93;font-weight:750;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px}
+.phi-head strong{color:#f4be77}
+.phi-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0 10px}
+.phi-actions button{border:1px solid #755f43;border-radius:9px;background:#463b2b;color:#ffe1b8;padding:9px 6px;font-size:11px;line-height:1.35;font-weight:680;min-height:42px}
+.phi-actions button:hover{background:#59462e}
+.phi-status{font-size:11px;line-height:1.5;color:#d1bd9f}
+.phi-guides{stroke:#eeb96a;stroke-dasharray:4 4;stroke-width:1.2;opacity:.8}
+.layout-v8 .main>#roomWrap{grid-column:1;grid-row:2;min-width:0;margin:0}
+.layout-v8 .main>#sceneOptions{grid-column:1/-1;grid-row:3}
+.layout-v8 .main>#busyIndicator{grid-row:4}
+@media(max-width:1390px){.layout-v8 .main>#roomWrap{grid-column:1;grid-row:2}.layout-v8 .main>#sceneOptions{grid-column:1;grid-row:4}.layout-v8 .main>#busyIndicator{grid-row:5}}
+@media(max-width:780px){.layout-v8 .main>#roomWrap,.layout-v8 .main>#sceneOptions{width:100%}.v9-scenes-grid{grid-template-columns:1fr}.v9-room-note{font-size:9px;right:7px}.v9-chip{min-height:43px}}
+@media(max-width:470px){.layout-v8 .main #roomWrap{height:360px;min-height:360px}.v9-sceneopt{padding:12px}.v9-chip{font-size:11px;padding:9px}}
+
 </style>
 </head>
 <body>
-<header><div class="brand"><div class="glyph">◖◗</div><div><div class="brandtitle">LAMELLA STUDIO</div><div class="brandsub">Stecklampen · Entwurf & Laserschnitt</div></div></div><div class="meta"><span class="pill">● V8 · Desktop & Mobil</span><span class="metaextra">Einheiten: Millimeter</span></div></header>
+<header><div class="brand"><div class="glyph">◖◗</div><div><div class="brandtitle">LAMELLA STUDIO</div><div class="brandsub">Stecklampen · Entwurf & Laserschnitt</div></div></div><div class="meta"><span class="pill">● V9 · Desktop & Mobil</span><span class="metaextra">Einheiten: Millimeter</span></div></header>
 <div class="app layout-v8">
 <main class="main" id="arbeitsbereich">
 
 <div class="iosnotice" id="browserHelp"><b>iPhone-Hinweis:</b> Wenn du diese HTML-Datei direkt in ChatGPT/Dateien als Vorschau öffnest, können die Bedienfunktionen blockiert werden. Für die volle Funktion die Web-App über eine <b>https://-Adresse in Safari</b> öffnen. <span id="mobileStatus">JavaScript wurde noch nicht gestartet.</span></div>
-<div class="eyebrow"><div><span class="muted">ENTWURF</span><strong style="font-size:14px;margin-left:8px">Individuelle Pendelleuchte</strong></div><div class="tabbar"><button id="tab3d" class="active" type="button">3D-Modell</button><button id="tabCut" type="button">Schnittbogen</button></div></div>
+<div class="eyebrow"><div><span class="muted">ENTWURF</span><strong style="font-size:14px;margin-left:8px">Individuelle Pendelleuchte</strong></div><div class="tabbar"><button id="tab3d" class="active" type="button">3D-Modell</button><button id="tabRoom" type="button">Im Raum</button><button id="tabCut" type="button">Schnittbogen</button></div></div>
 <div class="modelwrap" id="modelWrap"><canvas id="modelCanvas" aria-label="Drehbare dreidimensionale Vorschau der Lamellenleuchte"></canvas><div id="jsFallback">Die Vorschau ist hier nicht aktiv.<br><strong>Bitte die Web-App in Safari öffnen.</strong><br>Die ChatGPT-Dateivorschau führt das Zeichenprogramm nicht aus.</div><div class="viewport-caption">LIVE-VORSCHAU<b id="modelTitle">Glocke · 24 Lamellen</b></div><div class="viewport-bottom"><span id="viewportInfo">Mit dem Finger drehen · Ansicht verändern</span><div class="viewport-tools"><button type="button" id="resetView" title="Ansicht zurücksetzen">⟲</button><button type="button" id="zoomMinus" title="Verkleinern">−</button><button type="button" id="zoomPlus" title="Vergrößern">+</button></div></div></div>
+<div class="modelwrap hidden v9-scene" id="roomWrap"><canvas id="roomCanvas" role="img" aria-label="Illustrierte Raumszene mit individuell konfigurierter Leuchte und schematischem Lamellen-Schattenwurf"></canvas><div class="v9-room-note">Licht- &amp; Schattenstudie · illustrativ</div></div>
 <div class="modelwrap hidden" id="cutWrap" style="height:auto;min-height:350px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center"><div id="cutMain" style="width:min(100%,740px)"></div><div class="sheetbar" style="width:min(100%,740px)"><button id="mainPrev">← Bogen zurück</button><span id="mainSheetNo"></span><button id="mainNext">Bogen weiter →</button></div></div>
+<div id="sceneOptions" class="v9-sceneopt" hidden><h3>Raumwirkung live erleben</h3><p class="desc">Probiere Raum, Leuchtmittel und Lichtstimmung direkt aus. Keine Änderung an den Schnittdateien.</p><div class="v9-scenes-grid">
+ <div><div class="v9-choice-title">Raum</div><div class="v9-chips" id="roomChoices"></div></div>
+ <div><div class="v9-choice-title">Leuchtmittel</div><div class="v9-chips" id="bulbChoices"></div></div>
+ <div><div class="v9-choice-title">Helligkeit · Vergleich zu Glühlampen</div><div class="v9-chips" id="powerChoices"></div></div>
+ <div><div class="v9-choice-title">Lichtfarbe</div><div class="v9-chips" id="kelvinChoices"></div></div>
+</div><p class="v9-footnote" id="bulbSummary">Die W-Angabe ist ein Glühlampen-Vergleich, nicht die elektrische Leistungsaufnahme einer LED. Schatten sind eine gestalterische Näherung, keine physikalisch exakte Lichtsimulation. Werkstoff und Fassung auf zulässige Wärmebelastung prüfen.</p></div>
 <div id="busyIndicator" aria-live="polite"></div><div class="editorwrap">
 <div class="subpanel"><h3>Lamellenkontur frei gestalten</h3><div class="editor-note" id="profileHelp">Ziehe die fünf orangefarbenen Punkte waagerecht. Die äußere Kontur wird maßstäblich gezeigt und direkt für den Zuschnitt übernommen.</div><svg id="profileSvg" class="profile-svg" viewBox="0 0 320 400" role="img" aria-label="Bearbeitbares Lamellenprofil mit fünf Ziehpunkten"><text x="20" y="50" fill="#ffca87" font-size="15">Vorschau deaktiviert:</text><text x="20" y="77" fill="#ffca87" font-size="12">Bitte die Web-App in Safari öffnen.</text></svg><div class="switchrow"><label for="smooth">Weiche Kontur statt gerade Segmente</label><input type="checkbox" id="smooth" checked></div></div>
 <div class="subpanel"><h3>Fünf Konturpunkte</h3><div class="editor-note">Von der oberen bis zur unteren Lampenkante. 100 % ist der gewählte Maximaldurchmesser.</div><div id="profileSliders" class="profile-sliders"></div></div>
@@ -117,6 +156,7 @@ select,input[type=number]{background:#0c1520;color:var(--text);border:1px solid 
 <div class="ctrl"><div class="frow"><label for="count">Anzahl Lamellen</label><output id="countOut"></output></div><input id="count" type="range" min="8" max="48" step="1"></div>
 <div class="ctrl"><div class="frow"><label for="dia">Max. Durchmesser</label><output id="diaOut"></output></div><input id="dia" type="range" min="180" max="800" step="10"></div>
 <div class="ctrl"><div class="frow"><label for="height">Höhe der Lamellen</label><output id="heightOut"></output></div><input id="height" type="range" min="80" max="650" step="10"></div>
+<div class="phi-box" aria-label="Goldener Schnitt Proportionsassistent"><div class="phi-head"><span>✦ Goldener Schnitt</span><strong>φ = 1,618</strong></div><p class="help">Höhe und Durchmesser harmonisch aufeinander abstimmen; nur die Höhe wird angepasst.</p><div class="phi-actions"><button id="phiWide" type="button">Flache Leuchte<br>H = Ø / φ</button><button id="phiTall" type="button">Hohe Leuchte<br>H = Ø × φ</button></div><div class="phi-status" id="phiStatus"></div><label class="switchrow" for="phiGuides"><span>Goldene Hilfslinien (38,2 / 61,8 %)</span><input type="checkbox" id="phiGuides"></label></div>
 <div class="ctrl"><div class="frow"><label for="inner">Zentraler Innenradius</label><output id="innerOut"></output></div><input id="inner" type="range" min="40" max="130" step="5"><div class="help">Freiraum in der Mitte. Der Ausschnitt im Steckring ist separat davon abhängig.</div></div>
 <div class="ctrl"><div class="frow"><label for="variation">Lamellenfolge</label></div><select id="variation"><option value="same">Alle identisch</option><option value="alternate">A / B im Wechsel</option></select></div>
 <div class="ctrl hidden" id="alternateWrap"><div class="frow"><label for="alternate">Größe der B-Lamellen</label><output id="alternateOut"></output></div><input id="alternate" type="range" min="60" max="95" step="5"><div class="help">Jede zweite Lamelle hat eine kleinere Außenkontur. Beide Typen bekommen eigene Zuschnitte.</div></div>
@@ -162,7 +202,7 @@ const runtimeNotice=()=>{const h=document.getElementById('browserHelp');if(h)h.s
 window.addEventListener('error', e => { const h=document.getElementById('browserHelp'); if(h){h.style.display='block';h.textContent='Zeichenprogramm-Fehler: '+(e.message||'Unbekannter Fehler')+' · Bitte in Safari öffnen.';} });
 
 const $=(id)=>document.getElementById(id);
-const defaultState={ribMode:'outline',ribWidth:30,preset:'glocke',count:24,dia:400,height:340,inner:55,variation:'same',alternate:80,thick:3,clearance:.2,kerf:.15,joint:24,ringWidth:28,socketType:'E27',socketHole:40,mountHoles:0,boltCircle:54,boltHoleDia:4,material:'Pappelsperrholz',bedW:600,bedH:400,spacing:6,smooth:true,points:[.45,.83,1,.95,.68]};
+const defaultState={sceneRoom:'dining',bulb:'clear',bulbW:60,kelvin:2700,phiGuides:false,ribMode:'outline',ribWidth:30,preset:'glocke',count:24,dia:400,height:340,inner:55,variation:'same',alternate:80,thick:3,clearance:.2,kerf:.15,joint:24,ringWidth:28,socketType:'E27',socketHole:40,mountHoles:0,boltCircle:54,boltHoleDia:4,material:'Pappelsperrholz',bedW:600,bedH:400,spacing:6,smooth:true,points:[.45,.83,1,.95,.68]};
 const presets={glocke:[.45,.83,1,.95,.68],teller:[.25,.8,1,.8,.25],zylinder:[1,1,1,1,1],kegel:[.43,.55,.7,.84,1],sand:[.95,.65,.45,.65,.95],welle:[.58,1,.65,.94,.55],custom:null};
 const presetNames={glocke:'Glocke',teller:'Teller',zylinder:'Zylinder',kegel:'Kegel',sand:'Sanduhr',welle:'Welle',custom:'Freie Form'};
 const nums=['Oben','¼ Höhe','Mitte','¾ Höhe','Unten'];
@@ -174,16 +214,16 @@ const precis=(v,n=1)=>Number(v).toFixed(n).replace(/\.0$/,'').replace('.',',');
 const mm=(v)=>precis(v,1)+' mm';
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const round=(x)=>Math.round(x*10000)/10000;
-function normalize(v){const o={...defaultState,...v}; for(const k of [...rangeFields,'bedW','bedH','socketHole','boltCircle','boltHoleDia']){o[k]=Number(o[k]);if(!Number.isFinite(o[k]))o[k]=defaultState[k]};o.ribWidth=clamp(o.ribWidth,15,100);if(!['outline','solid'].includes(o.ribMode))o.ribMode='outline';o.count=Math.round(clamp(o.count,8,48));o.dia=clamp(o.dia,180,800);o.height=clamp(o.height,80,650);o.inner=clamp(o.inner,40,130);o.alternate=clamp(o.alternate,60,95);o.thick=clamp(o.thick,2,8);o.clearance=clamp(o.clearance,0,.6);o.kerf=clamp(o.kerf,0,.4);o.joint=clamp(o.joint,16,36);o.ringWidth=clamp(o.ringWidth,20,42);o.spacing=clamp(o.spacing,1,25);o.socketHole=clamp(o.socketHole,10,70);o.boltCircle=clamp(o.boltCircle,36,120);o.boltHoleDia=clamp(o.boltHoleDia,2,8);o.mountHoles=[0,2,4].includes(+o.mountHoles)?+o.mountHoles:0;if(!['E14','E27','custom'].includes(o.socketType))o.socketType='E27';o.bedW=clamp(o.bedW,180,3000);o.bedH=clamp(o.bedH,180,2000);o.points=Array.isArray(o.points)&&o.points.length===5?o.points.map(x=>clamp(Number(x)||.15,.15,1)):[...defaultState.points];o.smooth=!!o.smooth; if(!(o.preset in presets))o.preset='glocke';if(!['same','alternate'].includes(o.variation))o.variation='same';return o}
+function normalize(v){const o={...defaultState,...v}; for(const k of [...rangeFields,'bedW','bedH','socketHole','boltCircle','boltHoleDia']){o[k]=Number(o[k]);if(!Number.isFinite(o[k]))o[k]=defaultState[k]};o.ribWidth=clamp(o.ribWidth,15,100);if(!['outline','solid'].includes(o.ribMode))o.ribMode='outline';o.count=Math.round(clamp(o.count,8,48));o.dia=clamp(o.dia,180,800);o.height=clamp(o.height,80,650);o.inner=clamp(o.inner,40,130);o.alternate=clamp(o.alternate,60,95);o.thick=clamp(o.thick,2,8);o.clearance=clamp(o.clearance,0,.6);o.kerf=clamp(o.kerf,0,.4);o.joint=clamp(o.joint,16,36);o.ringWidth=clamp(o.ringWidth,20,42);o.spacing=clamp(o.spacing,1,25);o.socketHole=clamp(o.socketHole,10,70);o.boltCircle=clamp(o.boltCircle,36,120);o.boltHoleDia=clamp(o.boltHoleDia,2,8);o.mountHoles=[0,2,4].includes(+o.mountHoles)?+o.mountHoles:0;if(!['E14','E27','custom'].includes(o.socketType))o.socketType='E27';o.bedW=clamp(o.bedW,180,3000);o.bedH=clamp(o.bedH,180,2000);o.points=Array.isArray(o.points)&&o.points.length===5?o.points.map(x=>clamp(Number(x)||.15,.15,1)):[...defaultState.points];o.smooth=!!o.smooth; if(!(o.preset in presets))o.preset='glocke';if(!['same','alternate'].includes(o.variation))o.variation='same';if(!['dining','living','bedroom','loft'].includes(o.sceneRoom))o.sceneRoom='dining';if(!['clear','matte','filament','globe'].includes(o.bulb))o.bulb='clear';o.bulbW=[20,40,60,80,100].includes(+o.bulbW)?+o.bulbW:60;o.kelvin=[2200,2700,3000,4000].includes(+o.kelvin)?+o.kelvin:2700;o.phiGuides=!!o.phiGuides;return o}
 function save(){try{localStorage.setItem('lamella-studio-v1',JSON.stringify(S))}catch(e){}}
 function notify(msg){const e=$('toast');e.textContent=msg;e.classList.add('show');clearTimeout(notify.t);notify.t=setTimeout(()=>e.classList.remove('show'),3100)}
-function wireControls(){for(let k of [...rangeFields,'preset','variation','ribMode','material','bedW','bedH','socketType','socketHole','mountHoles','boltCircle','boltHoleDia']){const el=$(k);el.addEventListener(['bedW','bedH','socketHole','boltCircle','boltHoleDia'].includes(k)?'change':'input',()=>{if(k==='preset'){S.preset=el.value;if(presets[el.value]){S.points=[...presets[el.value]];if(el.value==='teller'){S.height=130;S.dia=Math.max(S.dia,400)}if(el.value==='zylinder'){S.height=340}}}else if(['variation','ribMode','material','socketType'].includes(k)){S[k]=el.value;if(k==='socketType'&&el.value!=='custom')S.socketHole=el.value==='E14'?28:40}else{S[k]=Number(el.value);if(k==='socketHole'&&((S.socketType==='E14'&&S[k]!==28)||(S.socketType==='E27'&&S[k]!==40)))S.socketType='custom'}S=normalize(S);scheduleRefresh()})} $('smooth').addEventListener('change',()=>{S.smooth=$('smooth').checked;refresh()});$('btnSave').addEventListener('click',()=>downloadText('LAMELLA_Projekt.json',JSON.stringify({app:'LAMELLA Studio',version:8,settings:S},null,2),'application/json'));$('btnLoad').addEventListener('click',()=>$('fileInput').click());$('fileInput').addEventListener('change',async(e)=>{const f=e.target.files?.[0];if(!f)return;try{const data=JSON.parse(await f.text());S=normalize(data.settings||data);refresh();notify('Projekt geladen')}catch(err){notify('Keine gültige Projektdatei')}e.target.value='' });
- $('tab3d').addEventListener('click',()=>setTab('3d'));$('tabCut').addEventListener('click',()=>setTab('cut'));
+function wireControls(){for(let k of [...rangeFields,'preset','variation','ribMode','material','bedW','bedH','socketType','socketHole','mountHoles','boltCircle','boltHoleDia']){const el=$(k);el.addEventListener(['bedW','bedH','socketHole','boltCircle','boltHoleDia'].includes(k)?'change':'input',()=>{if(k==='preset'){S.preset=el.value;if(presets[el.value]){S.points=[...presets[el.value]];if(el.value==='teller'){S.height=130;S.dia=Math.max(S.dia,400)}if(el.value==='zylinder'){S.height=340}}}else if(['variation','ribMode','material','socketType'].includes(k)){S[k]=el.value;if(k==='socketType'&&el.value!=='custom')S.socketHole=el.value==='E14'?28:40}else{S[k]=Number(el.value);if(k==='socketHole'&&((S.socketType==='E14'&&S[k]!==28)||(S.socketType==='E27'&&S[k]!==40)))S.socketType='custom'}S=normalize(S);scheduleRefresh()})} $('smooth').addEventListener('change',()=>{S.smooth=$('smooth').checked;refresh()});$('btnSave').addEventListener('click',()=>downloadText('LAMELLA_Projekt.json',JSON.stringify({app:'LAMELLA Studio',version:9,settings:S},null,2),'application/json'));$('btnLoad').addEventListener('click',()=>$('fileInput').click());$('fileInput').addEventListener('change',async(e)=>{const f=e.target.files?.[0];if(!f)return;try{const data=JSON.parse(await f.text());S=normalize(data.settings||data);refresh();notify('Projekt geladen')}catch(err){notify('Keine gültige Projektdatei')}e.target.value='' });
+ $('tab3d').addEventListener('click',()=>setTab('3d'));$('tabRoom').addEventListener('click',()=>setTab('room'));$('tabCut').addEventListener('click',()=>setTab('cut'));
  $('resetView').onclick=()=>{view={yaw:.53,pitch:.27,zoom:1};draw3d()};$('zoomPlus').onclick=()=>{view.zoom=clamp(view.zoom*1.15,.55,2.4);draw3d()};$('zoomMinus').onclick=()=>{view.zoom=clamp(view.zoom/1.15,.55,2.4);draw3d()};
  const canvas=$('modelCanvas');let pointer=null;canvas.addEventListener('pointerdown',e=>{pointer={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!pointer||pointer.id!==e.pointerId)return;view.yaw+=(e.clientX-pointer.x)*.012;view.pitch=clamp(view.pitch+(e.clientY-pointer.y)*.006,-.8,1.05);pointer.x=e.clientX;pointer.y=e.clientY;draw3d()});canvas.addEventListener('pointerup',()=>pointer=null);canvas.addEventListener('pointercancel',()=>pointer=null);canvas.addEventListener('wheel',e=>{e.preventDefault();view.zoom=clamp(view.zoom*(e.deltaY>0?.93:1.07),.55,2.4);draw3d()},{passive:false});
  for(let [prev,next] of [['prevSheet','nextSheet'],['mainPrev','mainNext']]){$(prev).onclick=()=>changeSheet(-1);$(next).onclick=()=>changeSheet(1)}
  $('exportSVG').onclick=()=>exportCurrent('svg');$('exportDXF').onclick=()=>exportCurrent('dxf');$('exportAllSVG').onclick=()=>exportZip('svg');$('exportAllDXF').onclick=()=>exportZip('dxf');
- if(typeof ResizeObserver==='function')new ResizeObserver(()=>draw3d()).observe(canvas);else window.addEventListener('resize',draw3d);
+ if(typeof ResizeObserver==='function')new ResizeObserver(()=>{draw3d();if(tab==='room')drawRoom()}).observe(canvas);else window.addEventListener('resize',draw3d);
  }
 function buildProfileSliders(){$('profileSliders').innerHTML=nums.map((n,i)=>`<div class="ctrl"><div class="frow"><label for="point${i}">${n}</label><output id="pointVal${i}"></output></div><input type="range" min="15" max="100" step="1" id="point${i}"></div>`).join('');nums.forEach((_,i)=>{$('point'+i).addEventListener('input',e=>{S.points[i]=+e.target.value/100;S.preset='custom';scheduleRefresh()})});const svg=$('profileSvg');let ptr=null;
 const pointX=e=>{const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse()).x};
@@ -196,6 +236,21 @@ svg.addEventListener('pointermove',e=>{if(!ptr||e.pointerId!==ptr.id)return;
  S.points[ptr.idx]=Math.round(clamp(ptr.value+dx/(ptr.scale*ptr.radialSpan),.15,1)*100)/100;
  S.preset='custom';scheduleRefresh()
 });svg.addEventListener('pointerup',()=>ptr=null);svg.addEventListener('pointercancel',()=>ptr=null)}
+
+function wirePhiAndScene(){
+ const phi=1.61803398875;
+ const updatePhi=()=>{const ratio=S.height/S.dia;$('phiStatus').textContent=`Aktuell: Höhe / Ø = ${precis(ratio,3)} · Ziel: 0,618 (flach) oder 1,618 (hoch)`+(S.height>Math.max(S.bedW,S.bedH)?' · ⚠ Für diese Höhe eine größere Laserplatte wählen.':'');$('phiGuides').checked=S.phiGuides};
+ const applyPhi=(tall)=>{const ideal=S.dia*(tall?phi:1/phi);S.height=clamp(Math.round(ideal/10)*10,80,650);scheduleRefresh();updatePhi();notify(S.height>Math.max(S.bedW,S.bedH)?'Größere Laserplatte nötig':Math.abs(S.height-ideal)>5?'Grenzwert: Höhe auf 650 mm begrenzt':'Goldenen Schnitt auf Höhe angewendet')};
+ $('phiWide').onclick=()=>applyPhi(false);$('phiTall').onclick=()=>applyPhi(true);
+ $('phiGuides').onchange=e=>{S.phiGuides=e.target.checked;save();drawProfile();updatePhi()};
+ const groups=[['roomChoices','sceneRoom',[['dining','Esszimmer'],['living','Wohnzimmer'],['bedroom','Schlafzimmer'],['loft','Loft / Café']]],['bulbChoices','bulb',[['clear','Klar'],['matte','Matt'],['filament','Filament'],['globe','Globe']]],['powerChoices','bulbW',[[20,'20 W'],[40,'40 W'],[60,'60 W'],[80,'80 W'],[100,'100 W']]],['kelvinChoices','kelvin',[[2200,'2200 K'],[2700,'2700 K'],[3000,'3000 K'],[4000,'4000 K']]]];
+ for(const [id,key,choices] of groups){const parent=$(id);for(const [val,name] of choices){const btn=document.createElement('button');btn.type='button';btn.className='v9-chip';btn.textContent=name;btn.dataset.key=key;btn.dataset.value=String(val);btn.onclick=()=>{S[key]=typeof val==='number'?val:val;save();updateSceneControls();drawRoom()};parent.appendChild(btn)}}
+ const lamps={20:200,40:470,60:806,80:1055,100:1521};
+ window.updateSceneControls=()=>{for(const node of document.querySelectorAll('.v9-chip'))node.setAttribute('aria-pressed',String(String(S[node.dataset.key])===node.dataset.value));$('bulbSummary').textContent=`${S.bulbW} W Glühlampen-Vergleich · ca. ${lamps[S.bulbW]} lm · ${S.kelvin} K. Tatsächliche LED-Leistungsaufnahme hängt vom Produkt ab. Die Schatten sind illustrativ und nicht lichttechnisch berechnet.`;updatePhi()};
+ updateSceneControls();
+ if(typeof ResizeObserver==='function')new ResizeObserver(()=>{if(tab==='room')drawRoom()}).observe($('roomCanvas'));
+ window.addEventListener('resize',()=>{if(tab==='room')drawRoom()});
+}
 function valueAt(t){const a=clamp(t,0,1)*4;const i=Math.min(3,Math.floor(a));const q=a-i;const p=S.points;if(!S.smooth)return p[i]*(1-q)+p[i+1]*q;let m0=i===0?p[1]-p[0]:(p[i+1]-p[i-1])*.5;let m1=i+2>=5?p[4]-p[3]:(p[i+2]-p[i])*.5;let q2=q*q,q3=q2*q;return clamp((2*q3-3*q2+1)*p[i]+(q3-2*q2+q)*m0+(-2*q3+3*q2)*p[i+1]+(q3-q2)*m1,.1,1.05)}
 function radialOuter(t,ratio=1){return S.inner+Math.max(0,S.dia/2-S.inner)*valueAt(t)*ratio}
 function radialInner(t,ratio=1){return S.ribMode==='outline'?radialOuter(t,ratio)-S.ribWidth:S.inner}
@@ -458,12 +513,12 @@ function exportCurrent(type){if(!canExport())return;const file=`LAMELLA_Bogen_${
 const crcTab=(()=>{let t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xedb88320^(c>>>1):c>>>1;t.push(c>>>0)}return t})();
 function crc32(b){let c=0xffffffff;for(let v of b)c=crcTab[(c^v)&255]^(c>>>8);return(c^0xffffffff)>>>0}
 function zipArchive(files){const enc=new TextEncoder(),entries=[],local=[],central=[];let offset=0;function uint16(v){return[v&255,v>>>8&255]}function uint32(v){return[v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255]}for(let f of files){const name=enc.encode(f.name),data=enc.encode(f.content),crc=crc32(data);const a=new Uint8Array([...uint32(0x04034b50),...uint16(20),...uint16(0x0800),...uint16(0),...uint16(0),...uint16(0),...uint32(crc),...uint32(data.length),...uint32(data.length),...uint16(name.length),...uint16(0),...name]);local.push(a,data);const b=new Uint8Array([...uint32(0x02014b50),...uint16(20),...uint16(20),...uint16(0x0800),...uint16(0),...uint16(0),...uint16(0),...uint32(crc),...uint32(data.length),...uint32(data.length),...uint16(name.length),...uint16(0),...uint16(0),...uint16(0),...uint16(0),...uint32(0),...uint32(offset),...name]);central.push(b);offset+=a.length+data.length;entries.push(f.name)}const cdSize=central.reduce((a,b)=>a+b.length,0);const end=new Uint8Array([...uint32(0x06054b50),...uint16(0),...uint16(0),...uint16(files.length),...uint16(files.length),...uint32(cdSize),...uint32(offset),...uint16(0)]);return new Blob([...local,...central,end],{type:'application/zip'})}
-function exportZip(type){if(!canExport())return;const ext=type==='svg'?'svg':'dxf';const fs=sheets.map((_,i)=>({name:`LAMELLA_Bogen_${String(i+1).padStart(2,'0')}.${ext}`,content:type==='svg'?svgSheet(i,false):dxfSheet(i)}));fs.push({name:'FERTIGUNGSHINWEISE.txt',content:`LAMELLA Studio V6 | Fertigungsdaten\n${S.count} Lamellen | Ø maximal ${S.dia} mm | Höhe ${S.height} mm\nMaterial: ${S.material} | Materialstärke: ${S.thick} mm\nSchlitz im CAD: ${precis(slotWidth(),2)} mm | Steckspiel: ${S.clearance} mm | Schnittfuge: ${S.kerf} mm\nLamellenmodus: ${S.ribMode==='outline'?'Konturstreifen, radial '+S.ribWidth+' mm':'Vollflächig'}\nSteckringe: 2 Stück | oben mit integrierter Vier-Speichen-Nabe und Zentralbohrung, unten offen\nFassungsaufnahme: ${S.socketType} | Bohrung Durchmesser ${S.socketHole} mm | Schraubbohrungen ${S.mountHoles} Stk.\n${S.mountHoles?'Lochkreis '+S.boltCircle+' mm | Schraublochdurchmesser '+S.boltHoleDia+' mm\n':''}Lasertisch: ${S.bedW} x ${S.bedH} mm | ${sheets.length} Schnittbögen\nMindestabstand zwischen Teilen: ${S.spacing} mm | Konturbasiertes Nesting, 0°/90°/180°/270°\n\nACHTUNG: Die Bohrung ist nur eine Aufnahme für eine passende Fassung mit Klemmringen, keine geprüfte tragende Aufhängung. E14/E27 sind Richtwerte; Fassung, Gewinde und Gegenring nachmessen. 1:1-Abmessungen und Passungen zunächst mit Testschnitten überprüfen. Hitzebeständigkeit, elektrische Sicherheit, Brandverhalten und Tragfähigkeit müssen vor Nutzung durch Fachkundige geprüft werden.\n`});fs.push({name:'LAMELLA_Projekt.json',content:JSON.stringify({app:'LAMELLA Studio',version:8,settings:S},null,2)});downloadBlob(`LAMELLA_${ext.toUpperCase()}_${sheets.length}_Boegen.zip`,zipArchive(fs));notify(`ZIP mit ${sheets.length} ${ext.toUpperCase()}-Bögen erstellt`)}
+function exportZip(type){if(!canExport())return;const ext=type==='svg'?'svg':'dxf';const fs=sheets.map((_,i)=>({name:`LAMELLA_Bogen_${String(i+1).padStart(2,'0')}.${ext}`,content:type==='svg'?svgSheet(i,false):dxfSheet(i)}));fs.push({name:'FERTIGUNGSHINWEISE.txt',content:`LAMELLA Studio V6 | Fertigungsdaten\n${S.count} Lamellen | Ø maximal ${S.dia} mm | Höhe ${S.height} mm\nMaterial: ${S.material} | Materialstärke: ${S.thick} mm\nSchlitz im CAD: ${precis(slotWidth(),2)} mm | Steckspiel: ${S.clearance} mm | Schnittfuge: ${S.kerf} mm\nLamellenmodus: ${S.ribMode==='outline'?'Konturstreifen, radial '+S.ribWidth+' mm':'Vollflächig'}\nSteckringe: 2 Stück | oben mit integrierter Vier-Speichen-Nabe und Zentralbohrung, unten offen\nFassungsaufnahme: ${S.socketType} | Bohrung Durchmesser ${S.socketHole} mm | Schraubbohrungen ${S.mountHoles} Stk.\n${S.mountHoles?'Lochkreis '+S.boltCircle+' mm | Schraublochdurchmesser '+S.boltHoleDia+' mm\n':''}Lasertisch: ${S.bedW} x ${S.bedH} mm | ${sheets.length} Schnittbögen\nMindestabstand zwischen Teilen: ${S.spacing} mm | Konturbasiertes Nesting, 0°/90°/180°/270°\n\nACHTUNG: Die Bohrung ist nur eine Aufnahme für eine passende Fassung mit Klemmringen, keine geprüfte tragende Aufhängung. E14/E27 sind Richtwerte; Fassung, Gewinde und Gegenring nachmessen. 1:1-Abmessungen und Passungen zunächst mit Testschnitten überprüfen. Hitzebeständigkeit, elektrische Sicherheit, Brandverhalten und Tragfähigkeit müssen vor Nutzung durch Fachkundige geprüft werden.\n`});fs.push({name:'LAMELLA_Projekt.json',content:JSON.stringify({app:'LAMELLA Studio',version:9,settings:S},null,2)});downloadBlob(`LAMELLA_${ext.toUpperCase()}_${sheets.length}_Boegen.zip`,zipArchive(fs));notify(`ZIP mit ${sheets.length} ${ext.toUpperCase()}-Bögen erstellt`)}
 function canExport(){if(!sheets.length||issues.some(x=>x.error)){notify('Bitte erst die Hinweise zur Geometrie / Plattengröße beheben');return false}return true}
-function setTab(v){tab=v;$('modelWrap').classList.toggle('hidden',v!=='3d');$('cutWrap').classList.toggle('hidden',v!=='cut');$('tab3d').classList.toggle('active',v==='3d');$('tabCut').classList.toggle('active',v==='cut');if(v==='cut')renderSheetView();else requestAnimationFrame(draw3d)}
+function setTab(v){tab=v;$('modelWrap').classList.toggle('hidden',v!=='3d');$('roomWrap').classList.toggle('hidden',v!=='room');$('cutWrap').classList.toggle('hidden',v!=='cut');$('sceneOptions').hidden=v!=='room';$('tab3d').classList.toggle('active',v==='3d');$('tabRoom').classList.toggle('active',v==='room');$('tabCut').classList.toggle('active',v==='cut');if(v==='cut')renderSheetView();else if(v==='room')requestAnimationFrame(drawRoom);else requestAnimationFrame(draw3d)}
 function changeSheet(delta){sheetIndex=clamp(sheetIndex+delta,0,Math.max(0,sheets.length-1));renderSheetView()}
 function renderSheetView(){const i=sheetIndex,ok=!!sheets.length;$('cutPreview').innerHTML=ok?svgSheet(i,true):'<div style="color:#e8aaa1;padding:35px 0">Keine Schnittbogenaufteilung möglich.</div>';$('cutMain').innerHTML=ok?svgSheet(i,true):'<div style="color:#f6b0b0">Geometrie oder Plattengröße anpassen.</div>';$('sheetNo').textContent=ok?`Bogen ${i+1} von ${sheets.length}`:'Kein Bogen';$('mainSheetNo').textContent=$('sheetNo').textContent;$('sheetLabel').textContent=S.bedW+' × '+S.bedH+' mm';for(let e of ['prevSheet','mainPrev'])$(e).disabled=!ok||i===0;for(let e of ['nextSheet','mainNext'])$(e).disabled=!ok||i>=sheets.length-1}
-function updateUI(){for(let k of rangeFields){$(k).value=S[k];const out=$(k+'Out');if(out)out.textContent=({count:S.count+' Stk.',dia:S.dia+' mm',height:S.height+' mm',inner:S.inner+' mm',alternate:S.alternate+' %',ribWidth:S.ribWidth+' mm',thick:mm(S.thick),clearance:mm(S.clearance),kerf:mm(S.kerf),joint:mm(S.joint),ringWidth:mm(S.ringWidth),spacing:mm(S.spacing)})[k]}for(let k of ['preset','variation','ribMode','material','bedW','bedH','socketType','socketHole','mountHoles','boltCircle','boltHoleDia'])$(k).value=S[k];$('socketHoleOut').textContent='Ø '+precis(S.socketHole)+' mm';$('mountHolesWrap').classList.toggle('hidden',!S.mountHoles);$('socketPreviewText').textContent='Oben: '+S.socketType+' · Ø '+precis(S.socketHole)+' mm · Nabe Ø '+precis(socketHubRadius()*2)+' mm'+(ringInner(ringZ()[0])-socketHubRadius()>=10?' · 4 Verbindungsstege':' · geschlossener Oberring')+(S.mountHoles?' · '+S.mountHoles+' Schraublöcher':'')+'.';$('alternateWrap').classList.toggle('hidden',S.variation!=='alternate');$('ribWidthWrap').classList.toggle('hidden',S.ribMode!=='outline');$('crossSection').innerHTML=S.ribMode==='outline'?`<div class="cross-label">Außenkontur&nbsp;&nbsp; ← ${S.ribWidth} mm →</div><div class="cross-strip" style="width:${Math.max(28,Math.min(93,S.ribWidth))}%"></div><div class="cross-help">Innenbereich bleibt frei · zwei lokale Befestigungslaschen</div>`:'<div class="cross-label">Vollflächige Ausführung bis zum Innenradius</div><div class="cross-solid"></div>'; $('profileHelp').textContent=S.ribMode==='outline'?'Ziehe die orangefarbenen Punkte waagerecht. Der Konturstreifen folgt der Außenlinie. Die 30-mm-Breite kannst du links ändern.':'Ziehe die orangefarbenen Punkte waagerecht. Die vollflächige Lamelle folgt deiner Außenkontur.';$('smooth').checked=S.smooth;S.points.forEach((p,i)=>{$('point'+i).value=Math.round(p*100);$('pointVal'+i).textContent=Math.round(p*100)+' %'});
+function updateUI(){if(window.updateSceneControls)window.updateSceneControls();for(let k of rangeFields){$(k).value=S[k];const out=$(k+'Out');if(out)out.textContent=({count:S.count+' Stk.',dia:S.dia+' mm',height:S.height+' mm',inner:S.inner+' mm',alternate:S.alternate+' %',ribWidth:S.ribWidth+' mm',thick:mm(S.thick),clearance:mm(S.clearance),kerf:mm(S.kerf),joint:mm(S.joint),ringWidth:mm(S.ringWidth),spacing:mm(S.spacing)})[k]}for(let k of ['preset','variation','ribMode','material','bedW','bedH','socketType','socketHole','mountHoles','boltCircle','boltHoleDia'])$(k).value=S[k];$('socketHoleOut').textContent='Ø '+precis(S.socketHole)+' mm';$('mountHolesWrap').classList.toggle('hidden',!S.mountHoles);$('socketPreviewText').textContent='Oben: '+S.socketType+' · Ø '+precis(S.socketHole)+' mm · Nabe Ø '+precis(socketHubRadius()*2)+' mm'+(ringInner(ringZ()[0])-socketHubRadius()>=10?' · 4 Verbindungsstege':' · geschlossener Oberring')+(S.mountHoles?' · '+S.mountHoles+' Schraublöcher':'')+'.';$('alternateWrap').classList.toggle('hidden',S.variation!=='alternate');$('ribWidthWrap').classList.toggle('hidden',S.ribMode!=='outline');$('crossSection').innerHTML=S.ribMode==='outline'?`<div class="cross-label">Außenkontur&nbsp;&nbsp; ← ${S.ribWidth} mm →</div><div class="cross-strip" style="width:${Math.max(28,Math.min(93,S.ribWidth))}%"></div><div class="cross-help">Innenbereich bleibt frei · zwei lokale Befestigungslaschen</div>`:'<div class="cross-label">Vollflächige Ausführung bis zum Innenradius</div><div class="cross-solid"></div>'; $('profileHelp').textContent=S.ribMode==='outline'?'Ziehe die orangefarbenen Punkte waagerecht. Der Konturstreifen folgt der Außenlinie. Die 30-mm-Breite kannst du links ändern.':'Ziehe die orangefarbenen Punkte waagerecht. Die vollflächige Lamelle folgt deiner Außenkontur.';$('smooth').checked=S.smooth;S.points.forEach((p,i)=>{$('point'+i).value=Math.round(p*100);$('pointVal'+i).textContent=Math.round(p*100)+' %'});
  $('modelTitle').textContent=presetNames[S.preset]+' · '+S.count+' Lamellen';$('numParts').textContent=S.count+2;$('numSheets').textContent=sheets.length||'–';let max=Math.max(...Array.from({length:101},(_,i)=>radialOuter(i/100)));$('realDia').textContent=String(Math.round(max*2));$('slotWidth').textContent=precis(slotWidth(),2);
  const arr=[['Lamellen Typ A',String(S.variation==='alternate'?Math.ceil(S.count/2):S.count)+' Stk.'],...(S.variation==='alternate'?[['Lamellen Typ B',Math.floor(S.count/2)+' Stk.']]:[]),['Lamellenart',S.ribMode==='outline'?'Kontur · '+S.ribWidth+' mm':'Vollflächig'],['Steckringe','2 · oben mit Fassungsnabe'],['Fassung',S.socketType+' · Ø '+precis(S.socketHole)+' mm'],...(S.mountHoles? [['Montagebohrungen',S.mountHoles+' × Ø '+precis(S.boltHoleDia)+' mm auf Lochkreis Ø '+precis(S.boltCircle)+' mm']]:[]),['Ringöffnung unten','Ø '+precis(ringInner(ringZ()[1])*2)+' mm'],['Ringe außen',ringZ().map(z=>'Ø '+precis(ringOuter(z)*2)).join(' / ')+' mm'],['Ringpositionen','bei '+ringZ().map(n=>precis(n)).join(' / ')+' mm'],['Material',S.material+' · '+precis(S.thick)+' mm'],['Platten',sheets.length+' × '+S.bedW+' × '+S.bedH+' mm'],['Schnittteil-Abstand','mind. '+S.spacing+' mm · konturbasiert']];$('details').innerHTML=arr.map(a=>`<div class="detail"><span>${a[0]}</span><span>${a[1]}</span></div>`).join('');const problems=checkDesign();let errs=problems.err.slice();if(issues.some(v=>v.error))errs.push(...issues.filter(v=>v.error).map(v=>v.message));$('warnings').innerHTML=(errs.length?`<div class="warning error">⚠ <b>Konstruktion anpassen</b><br>${[...new Set(errs)].join('<br>')}</div>`:`<div class="warning" style="background:#1b302c;border-color:#31564b;color:#b5e9cd">✓ Schnittgeometrie erstellt. Vor Produktion einen Stecktest und eine Sicherheitsprüfung machen.</div>`)+(problems.warn.length?`<div class="warning">${problems.warn.join('<br>')}</div>`:'');const dis=errs.length>0||sheets.length===0;for(let id of ['exportAllSVG','exportSVG','exportDXF','exportAllDXF'])$(id).disabled=dis}
 function drawProfile(){
@@ -499,8 +554,96 @@ function drawProfile(){
   const t=i/4,y=sy(t*S.height),x=sx(radialOuter(t));
   markup+=`<line x1="${x}" y1="${y-10}" x2="${x}" y2="${y+10}" stroke="#ffeac9" stroke-width="1"/><circle class="handle" data-idx="${i}" cx="${x}" cy="${y}" r="10" fill="#ffb963" stroke="#1a2732" stroke-width="3"/><circle class="handle" data-idx="${i}" cx="${x}" cy="${y}" r="18" fill="transparent"/>`
  }
+ if(S.phiGuides){for(const f of [.382,.618]){const yy=sy(f*S.height);markup+=`<line class="phi-guides" x1="${padL+gridL-8}" y1="${yy}" x2="${vbW-padR}" y2="${yy}"/><text x="${vbW-padR}" y="${yy-3}" fill="#eec38d" text-anchor="end" font-size="9">φ ${(f*100).toFixed(1).replace('.',',')} %</text>`}}
  markup+=`<text x="${vbW-padR}" y="${vbH-8}" fill="#8195a4" font-family="Arial" font-size="10" text-anchor="end">Maßstäblich · H ${S.height} mm · max. Breite ${precis(shapeW)} mm</text>`;
  svg.dataset.pxPerMm=String(pxPerMm);svg.innerHTML=markup
+}
+
+function drawRoom(){
+ const canvas=$('roomCanvas'),rect=canvas.getBoundingClientRect();if(rect.width<10||rect.height<10)return;
+ const dpr=Math.min(2,window.devicePixelRatio||1);canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);
+ const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,rect.width,rect.height);
+ const k=Math.max(rect.width/1000,rect.height/600),offsetX=(rect.width-k*1000)/2,offsetY=(rect.height-k*600)/2;
+ ctx.translate(offsetX,offsetY);ctx.scale(k,k);
+ const b=S.bulbW,dim=({20:.22,40:.39,60:.58,80:.75,100:.94})[b],warm=S.kelvin<=2700;
+ const lightRGB=S.kelvin===2200?[255,159,73]:S.kelvin===2700?[255,197,122]:S.kelvin===3000?[255,220,167]:[235,240,255];
+ const rgb=(alpha)=>`rgba(${lightRGB.join(',')},${alpha})`;
+ const rectFill=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(x,y,w,h)};
+ const ellipse=(x,y,rx,ry,c)=>{ctx.beginPath();ctx.ellipse(x,y,Math.max(1,rx),Math.max(1,ry),0,0,Math.PI*2);ctx.fillStyle=c;ctx.fill()};
+ const poly=(p,fill,stroke)=>{ctx.beginPath();p.forEach((v,i)=>i?ctx.lineTo(v[0],v[1]):ctx.moveTo(v[0],v[1]));ctx.closePath();if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}};
+ const grad=(x1,y1,x2,y2,stops)=>{let g=ctx.createLinearGradient(x1,y1,x2,y2);for(const [a,color] of stops)g.addColorStop(a,color);return g};
+ const theme={dining:['#d7c6af','#a79379','#a77f62','#754c32'],living:['#c5c8c3','#9fa9aa','#aa9c83','#344c56'],bedroom:['#c8bab2','#9b9caa','#a98274','#674f55'],loft:['#bcbebc','#7e9295','#977b65','#2e464b']}[S.sceneRoom];
+ rectFill(0,0,1000,600,grad(0,0,0,600,[[0,theme[0]],[.71,theme[1]],[1,'#64574a']]));
+ // Ceiling, wall split and perspective geometry.
+ poly([[0,0],[1000,0],[1000,64],[0,64]],'#ebe7df');
+ poly([[0,64],[155,104],[155,399],[0,440]],'#a2a1a0');
+ poly([[850,98],[1000,64],[1000,446],[850,404]],'#8f938f');
+ poly([[0,406],[500,369],[1000,405],[1000,600],[0,600]],grad(0,390,0,600,[[0,'#8f7965'],[1,'#625548']]));
+ ctx.strokeStyle='#e4dace';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(155,103);ctx.lineTo(850,98);ctx.stroke();
+ // Windows and artwork; background changes per room.
+ if(S.sceneRoom==='loft'){for(let n=0;n<4;n++){const x=165+n*112;rectFill(x,119,101,222,'#374a55');rectFill(x+8,128,85,206,grad(0,120,0,342,[[0,'#8da6b3'],[1,'#b7c1b2']]));rectFill(x+49,119,5,222,'#4a5d62');rectFill(x,227,101,5,'#4a5d62')}}
+ else {rectFill(693,127,139,203,'#ebe4d6');rectFill(703,137,119,183,grad(0,137,0,330,[[0,'#9cb7b6'],[1,'#c8c9af']]));rectFill(759,137,5,183,'#f4eade');rectFill(703,237,119,5,'#f4eade');rectFill(690,325,150,11,'#e2d5be');poly([[230,170],[343,164],[343,282],[230,285]],'#e2d7c8','#8a817b');rectFill(249,184,75,82,theme[3]);ellipse(285,218,23,31,'#d8b892')}
+ // Ceiling to floor ambient light gradient (brightness driven by W-equivalent).
+ let glow=ctx.createRadialGradient(500,175,22,500,175,520);glow.addColorStop(0,rgb(.06+.19*dim));glow.addColorStop(.4,rgb(.04+.14*dim));glow.addColorStop(1,rgb(0));rectFill(0,60,1000,540,glow);
+ // Lamella-dependent shadow rays from visible pendant toward ceiling, walls and ground.
+ let n=S.count,profile=.65+.35*valueAt(.5),widthAlpha=S.ribMode==='solid'?1.25:Math.max(.5,S.ribWidth/35);
+ const hard={clear:.85,matte:.28,filament:.92,globe:.5}[S.bulb];
+ ctx.save();ctx.globalCompositeOperation='multiply';
+ for(let i=0;i<n;i++){
+  let a=Math.PI*2*i/n+.15,cs=Math.cos(a),sn=Math.sin(a);
+  const xx=500+cs*(510+60*profile),yy=86+sn*240;
+  let g=ctx.createLinearGradient(500,110,xx,yy);g.addColorStop(0,'rgba(48,34,19,0)');g.addColorStop(.2,`rgba(36,29,22,${(.05+.13*hard*dim)*widthAlpha})`);g.addColorStop(1,'rgba(38,30,24,0)');
+  ctx.beginPath();ctx.moveTo(500+cs*95,108+sn*30);ctx.quadraticCurveTo(500+cs*255,65+sn*120,xx,yy);
+  ctx.strokeStyle=g;ctx.lineWidth=(S.ribMode==='solid'?10:6)*widthAlpha*(hard>.7?1:1.7);ctx.stroke();
+ }
+ // floor shadow streaks, softened for matte bulb.
+ for(let i=0;i<n;i++){
+  let a=2*Math.PI*i/n+.22,xx=500+Math.cos(a)*510,yy=455+Math.sin(a)*115;
+  let g=ctx.createLinearGradient(500,425,xx,yy);g.addColorStop(0,`rgba(35,25,18,${.19*dim*hard})`);g.addColorStop(1,'rgba(35,25,18,0)');
+  ctx.strokeStyle=g;ctx.lineWidth=(S.ribMode==='solid'?14:8)*(1.5-hard);ctx.beginPath();ctx.moveTo(500,420);ctx.lineTo(xx,yy);ctx.stroke();
+ }
+ ctx.restore();
+ // Furnishing silhouettes with variation by scene.
+ function legs(x1,x2,y,h,c){rectFill(x1,y,12,h,c);rectFill(x2,y,12,h,c)}
+ if(S.sceneRoom==='dining'){
+  ellipse(498,515,288,56,'#c3ad96');
+  poly([[264,398],[321,380],[348,479],[295,491]],'#665345');poly([[694,379],[738,403],[726,490],[685,476]],'#665345');
+  legs(356,646,460,82,'#5a3b2e');ellipse(503,456,270,46,'#5f3e2c');ellipse(503,447,274,42,'#a97a55');ellipse(495,446,243,32,'#bf9571');
+  rectFill(493,388,9,46,'#8b7556');ellipse(498,387,26,10,'#dac8b1');
+ }else if(S.sceneRoom==='living'){
+  ellipse(479,516,337,67,'#b2a994');
+  rectFill(226,403,515,116,'#72868a');rectFill(218,383,531,58,'#87999b');
+  rectFill(221,415,49,100,'#738a8c');rectFill(702,415,46,100,'#72888a');
+  rectFill(300,430,92,37,'#aab2b1');rectFill(585,430,97,37,'#beaaa0');
+  legs(403,600,477,52,'#5c4736');ellipse(504,471,165,36,'#987963');
+ }else if(S.sceneRoom==='bedroom'){
+  ellipse(496,530,342,57,'#a69a95');rectFill(243,388,510,76,'#806b72');rectFill(259,436,474,106,'#d5c7bb');
+  rectFill(267,435,458,37,'#ede1d3');rectFill(282,441,112,44,'#f0e5d6');rectFill(590,441,112,44,'#ece1d8');
+  rectFill(262,518,473,28,'#aa8a8a');rectFill(172,452,75,12,'#6a5252');rectFill(761,452,73,12,'#6a5252');
+ }else {
+  ellipse(507,525,352,58,'#867a70');legs(347,655,444,119,'#374747');poly([[276,429],[716,429],[684,455],[306,455]],'#b6a18b');
+  for(let i=0;i<3;i++){let x=344+i*154;rectFill(x,475,13,65,'#4a4c48');ellipse(x+7,469,35,14,'#b2a391')}
+ }
+ // Pendant cable and canopy.
+ ctx.strokeStyle='#494540';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(500,49);ctx.lineTo(500,116);ctx.stroke();ellipse(500,49,25,7,'#71665c');
+ // Actual profile geometry is reused for a 3D-like representation of the lamp.
+ const factor=Math.min(.58,365/Math.max(S.height,180),410/Math.max(S.dia,200));
+ const top=117, cx=500;const project=(r,a,y)=>[cx+Math.cos(a)*r*factor,top+y*factor+Math.sin(a)*r*factor*.14];
+ const far=[],near=[];
+ for(let i=0;i<S.count;i++){let a=2*Math.PI*i/S.count+.16,v=Math.sin(a),ratio=S.variation==='alternate'&&i%2?S.alternate/100:1;(v<0?far:near).push({a,ratio,v})}
+ far.sort((x,y)=>x.v-y.v);near.sort((x,y)=>x.v-y.v);
+ function rib(r){let p=[];for(let i=0;i<=40;i++){let t=i/40;p.push(project(radialOuter(t,r.ratio),r.a,t*S.height))}for(let i=40;i>=0;i--){let t=i/40;p.push(project(radialInner(t,r.ratio),r.a,t*S.height))}poly(p,`rgba(197,133,77,${S.material==='Acrylglas'?.43:.91})`,'rgba(255,228,182,.25)')}
+ far.forEach(rib);
+ for(let z of ringZ()){ctx.beginPath();ctx.ellipse(cx,top+z*factor,radialOuter(z/S.height)*factor,radialOuter(z/S.height)*factor*.14,0,0,Math.PI*2);ctx.strokeStyle='rgba(228,172,112,.8)';ctx.lineWidth=Math.max(2,S.thick*factor);ctx.stroke()}
+ // Bloom appears inside and around the lamp, depending on bulb type and temperature.
+ const mid=top+S.height*factor*.47,radius=65+76*dim;
+ let lg=ctx.createRadialGradient(cx,mid,3,cx,mid,radius);lg.addColorStop(0,rgb(.72*dim));lg.addColorStop(.31,rgb(.26*dim));lg.addColorStop(1,rgb(0));ellipse(cx,mid,radius,radius,lg);
+ ctx.fillStyle=rgb(.85);ctx.beginPath();ctx.ellipse(cx,mid,S.bulb==='globe'?12:8,S.bulb==='filament'?24:17,0,0,Math.PI*2);ctx.fill();
+ near.forEach(rib);
+ // subtle footer label embedded in illustration.
+ rectFill(0,567,1000,33,'rgba(18,27,32,.72)');ctx.fillStyle='#f5e8ce';ctx.font='14px system-ui';
+ const name={dining:'ESSZIMMER',living:'WOHNZIMMER',bedroom:'SCHLAFZIMMER',loft:'LOFT / CAFÉ'}[S.sceneRoom];
+ ctx.textAlign='center';ctx.fillText(`${name}  ·  ${S.count} LAMELLEN  ·  ${S.bulbW} W-VERGL.  ·  ${S.kelvin} K`,500,589);ctx.textAlign='start'
 }
 function draw3d(){const can=$('modelCanvas');const rect=can.getBoundingClientRect();if(rect.width<10||rect.height<10)return;const DPR=Math.min(2,window.devicePixelRatio||1),W=rect.width,H=rect.height;can.width=Math.round(W*DPR);can.height=Math.round(H*DPR);const ctx=can.getContext('2d');ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearRect(0,0,W,H);
 const sc=Math.min((W-42)/(S.dia*1.14),(H-55)/(S.height*1.13))*view.zoom;const cy=H*.52,cx=W*.5;let pitch=view.pitch,yaw=view.yaw;
@@ -520,16 +663,16 @@ function scheduleRefresh(){
  S=normalize(S);save();
  // Sofortige leichte visuelle Reaktion; das rechenintensive Nesting folgt
  // nach kurzer Eingabepause, damit Slider auf dem iPhone flüssig bleiben.
- drawProfile();draw3d();
+ drawProfile();draw3d();if(tab==='room')drawRoom();
  const msg=$('busyIndicator');if(msg)msg.textContent='Schnittbögen werden aktualisiert …';
  for(const id of ['exportAllSVG','exportSVG','exportDXF','exportAllDXF'])$(id).disabled=true;
  if(pendingRefresh)clearTimeout(pendingRefresh);
  pendingRefresh=setTimeout(()=>{pendingRefresh=null;refresh()},220);
 }
-function refresh(){if(pendingRefresh){clearTimeout(pendingRefresh);pendingRefresh=null}S=normalize(S);save();parts=makeParts();const p=pack(parts);sheets=p.sheets;issues=[];if(p.unfit)issues.push({error:true,message:`Teil „${p.unfit.name}“ passt nicht auf die gewählte ${S.bedW} × ${S.bedH} mm Platte.`});const check=checkDesign();for(let msg of check.err)issues.push({error:true,message:msg});sheetIndex=clamp(sheetIndex,0,Math.max(0,sheets.length-1));updateUI();drawProfile();renderSheetView();const msg=$('busyIndicator');if(msg)msg.textContent='✓ Vorschau und Schnittbögen aktuell';requestAnimationFrame(draw3d)}
-buildProfileSliders();wireControls();runtimeNotice();refresh();
+function refresh(){if(pendingRefresh){clearTimeout(pendingRefresh);pendingRefresh=null}S=normalize(S);save();parts=makeParts();const p=pack(parts);sheets=p.sheets;issues=[];if(p.unfit)issues.push({error:true,message:`Teil „${p.unfit.name}“ passt nicht auf die gewählte ${S.bedW} × ${S.bedH} mm Platte.`});const check=checkDesign();for(let msg of check.err)issues.push({error:true,message:msg});sheetIndex=clamp(sheetIndex,0,Math.max(0,sheets.length-1));updateUI();drawProfile();renderSheetView();const msg=$('busyIndicator');if(msg)msg.textContent='✓ Vorschau und Schnittbögen aktuell';requestAnimationFrame(()=>{draw3d();if(tab==='room')drawRoom()})}
+buildProfileSliders();wireControls();wirePhiAndScene();runtimeNotice();refresh();
 // Für automatisierte Qualitätsprüfungen des Offline-Prototyps.
-window.LAMELLA_TEST={getState:()=>JSON.parse(JSON.stringify(S)),setState:(value)=>{S=normalize({...S,...value});refresh()},slotWidth,radialOuter,radialInner,ringBase,ringOuter,ringInner,socketHubRadius,ringPart,makeParts,pack,svgSheet,dxfSheet,checkDesign,zipArchive,transformed,getSheets:()=>sheets};
+window.LAMELLA_TEST={getState:()=>JSON.parse(JSON.stringify(S)),setState:(value)=>{S=normalize({...S,...value});refresh()},slotWidth,radialOuter,radialInner,ringBase,ringOuter,ringInner,socketHubRadius,ringPart,makeParts,pack,svgSheet,dxfSheet,checkDesign,zipArchive,transformed,getSheets:()=>sheets,drawRoom, getActiveTab:()=>tab};
 })();
 </script>
 </body>
