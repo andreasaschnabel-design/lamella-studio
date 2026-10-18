@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111923">
-<title>LAMELLA Studio V9 · Raumwirkung & Goldener Schnitt</title>
+<title>LAMELLA Studio V10 · Maßstäbliche Raumwirkung</title>
 <style>
 :root{--bg:#0b1119;--pane:#121b26;--pane2:#172230;--edge:#2b3a48;--text:#f0f3f4;--sub:#a6b5c4;--muted:#718495;--accent:#ffb55a;--accent2:#fa8f4c;--teal:#86dfcf;--bad:#ff8c8c;--sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -123,24 +123,35 @@ select,input[type=number]{background:#0c1520;color:var(--text);border:1px solid 
 @media(max-width:780px){.layout-v8 .main>#roomWrap,.layout-v8 .main>#sceneOptions{width:100%}.v9-scenes-grid{grid-template-columns:1fr}.v9-room-note{font-size:9px;right:7px}.v9-chip{min-height:43px}}
 @media(max-width:470px){.layout-v8 .main #roomWrap{height:360px;min-height:360px}.v9-sceneopt{padding:12px}.v9-chip{font-size:11px;padding:9px}}
 
+
+/* V10 · Echtes Größenverhältnis zu Referenzmöbeln statt freier Szenen-Zoom */
+.v10-room-size{position:absolute;top:12px;left:14px;padding:8px 10px;max-width:60%;border:1px solid #ffffff3d;border-radius:9px;background:#10202bdd;color:#fff0d4;font-size:11px;font-weight:700;line-height:1.4;pointer-events:none;z-index:2}
+.v10-hang{grid-column:1/-1;max-width:650px;padding:10px 13px;border:1px solid #415564;background:#162832;border-radius:10px}
+.v10-hang .v9-choice-title{display:flex;justify-content:space-between;gap:10px}
+.v10-hang #hangOffsetLabel{color:#ffbe77}
+.v10-hang input[type="range"]{width:100%;accent-color:#f5b566;min-height:28px}
+.v10-hang-note{font-size:11px;color:#b0c5ce;line-height:1.5}
+@media(max-width:470px){.v10-room-size{font-size:9px;top:44px;left:8px;max-width:80%;padding:5px 8px}}
+
 </style>
 </head>
 <body>
-<header><div class="brand"><div class="glyph">◖◗</div><div><div class="brandtitle">LAMELLA STUDIO</div><div class="brandsub">Stecklampen · Entwurf & Laserschnitt</div></div></div><div class="meta"><span class="pill">● V9 · Desktop & Mobil</span><span class="metaextra">Einheiten: Millimeter</span></div></header>
+<header><div class="brand"><div class="glyph">◖◗</div><div><div class="brandtitle">LAMELLA STUDIO</div><div class="brandsub">Stecklampen · Entwurf & Laserschnitt</div></div></div><div class="meta"><span class="pill">● V10 · Raummaßstab</span><span class="metaextra">Einheiten: Millimeter</span></div></header>
 <div class="app layout-v8">
 <main class="main" id="arbeitsbereich">
 
 <div class="iosnotice" id="browserHelp"><b>iPhone-Hinweis:</b> Wenn du diese HTML-Datei direkt in ChatGPT/Dateien als Vorschau öffnest, können die Bedienfunktionen blockiert werden. Für die volle Funktion die Web-App über eine <b>https://-Adresse in Safari</b> öffnen. <span id="mobileStatus">JavaScript wurde noch nicht gestartet.</span></div>
 <div class="eyebrow"><div><span class="muted">ENTWURF</span><strong style="font-size:14px;margin-left:8px">Individuelle Pendelleuchte</strong></div><div class="tabbar"><button id="tab3d" class="active" type="button">3D-Modell</button><button id="tabRoom" type="button">Im Raum</button><button id="tabCut" type="button">Schnittbogen</button></div></div>
 <div class="modelwrap" id="modelWrap"><canvas id="modelCanvas" aria-label="Drehbare dreidimensionale Vorschau der Lamellenleuchte"></canvas><div id="jsFallback">Die Vorschau ist hier nicht aktiv.<br><strong>Bitte die Web-App in Safari öffnen.</strong><br>Die ChatGPT-Dateivorschau führt das Zeichenprogramm nicht aus.</div><div class="viewport-caption">LIVE-VORSCHAU<b id="modelTitle">Glocke · 24 Lamellen</b></div><div class="viewport-bottom"><span id="viewportInfo">Mit dem Finger drehen · Ansicht verändern</span><div class="viewport-tools"><button type="button" id="resetView" title="Ansicht zurücksetzen">⟲</button><button type="button" id="zoomMinus" title="Verkleinern">−</button><button type="button" id="zoomPlus" title="Vergrößern">+</button></div></div></div>
-<div class="modelwrap hidden v9-scene" id="roomWrap"><canvas id="roomCanvas" role="img" aria-label="Illustrierte Raumszene mit individuell konfigurierter Leuchte und schematischem Lamellen-Schattenwurf"></canvas><div class="v9-room-note">Licht- &amp; Schattenstudie · illustrativ</div></div>
+<div class="modelwrap hidden v9-scene" id="roomWrap"><canvas id="roomCanvas" role="img" aria-label="Illustrierte Raumszene mit proportional zu den Möbeln dargestellter Leuchte und schematischem Lamellen-Schattenwurf"></canvas><div class="v10-room-size" id="roomScaleInfo">Ø 400 mm · H 340 mm · Bezug: Esstisch ca. 1,80 m</div><div class="v9-room-note">Licht- &amp; Schattenstudie · illustrativ</div></div>
 <div class="modelwrap hidden" id="cutWrap" style="height:auto;min-height:350px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center"><div id="cutMain" style="width:min(100%,740px)"></div><div class="sheetbar" style="width:min(100%,740px)"><button id="mainPrev">← Bogen zurück</button><span id="mainSheetNo"></span><button id="mainNext">Bogen weiter →</button></div></div>
 <div id="sceneOptions" class="v9-sceneopt" hidden><h3>Raumwirkung live erleben</h3><p class="desc">Probiere Raum, Leuchtmittel und Lichtstimmung direkt aus. Keine Änderung an den Schnittdateien.</p><div class="v9-scenes-grid">
  <div><div class="v9-choice-title">Raum</div><div class="v9-chips" id="roomChoices"></div></div>
  <div><div class="v9-choice-title">Leuchtmittel</div><div class="v9-chips" id="bulbChoices"></div></div>
  <div><div class="v9-choice-title">Helligkeit · Vergleich zu Glühlampen</div><div class="v9-chips" id="powerChoices"></div></div>
  <div><div class="v9-choice-title">Lichtfarbe</div><div class="v9-chips" id="kelvinChoices"></div></div>
-</div><p class="v9-footnote" id="bulbSummary">Die W-Angabe ist ein Glühlampen-Vergleich, nicht die elektrische Leistungsaufnahme einer LED. Schatten sind eine gestalterische Näherung, keine physikalisch exakte Lichtsimulation. Werkstoff und Fassung auf zulässige Wärmebelastung prüfen.</p></div>
+ <div class="v10-hang"><div class="v9-choice-title">Hängeposition <span id="hangOffsetLabel">Standard</span></div><input id="hangOffset" type="range" min="-250" max="250" step="25" value="0" aria-label="Hängeposition relativ zur Möbelfläche einstellen"/><div id="hangOffsetInfo" class="v10-hang-note">Abstand wird am Möbelmaßstab ausgerichtet</div></div>
+</div><p class="v9-footnote" id="bulbSummary">Die Raumproportionen orientieren sich an typischen Möbelabmessungen, nicht an einem vermessenen Foto. Die W-Angabe ist ein Glühlampen-Vergleich, nicht die elektrische Leistungsaufnahme einer LED. Schatten sind eine gestalterische Näherung, keine physikalisch exakte Lichtsimulation. Werkstoff und Fassung auf zulässige Wärmebelastung prüfen.</p></div>
 <div id="busyIndicator" aria-live="polite"></div><div class="editorwrap">
 <div class="subpanel"><h3>Lamellenkontur frei gestalten</h3><div class="editor-note" id="profileHelp">Ziehe die fünf orangefarbenen Punkte waagerecht. Die äußere Kontur wird maßstäblich gezeigt und direkt für den Zuschnitt übernommen.</div><svg id="profileSvg" class="profile-svg" viewBox="0 0 320 400" role="img" aria-label="Bearbeitbares Lamellenprofil mit fünf Ziehpunkten"><text x="20" y="50" fill="#ffca87" font-size="15">Vorschau deaktiviert:</text><text x="20" y="77" fill="#ffca87" font-size="12">Bitte die Web-App in Safari öffnen.</text></svg><div class="switchrow"><label for="smooth">Weiche Kontur statt gerade Segmente</label><input type="checkbox" id="smooth" checked></div></div>
 <div class="subpanel"><h3>Fünf Konturpunkte</h3><div class="editor-note">Von der oberen bis zur unteren Lampenkante. 100 % ist der gewählte Maximaldurchmesser.</div><div id="profileSliders" class="profile-sliders"></div></div>
@@ -202,7 +213,7 @@ const runtimeNotice=()=>{const h=document.getElementById('browserHelp');if(h)h.s
 window.addEventListener('error', e => { const h=document.getElementById('browserHelp'); if(h){h.style.display='block';h.textContent='Zeichenprogramm-Fehler: '+(e.message||'Unbekannter Fehler')+' · Bitte in Safari öffnen.';} });
 
 const $=(id)=>document.getElementById(id);
-const defaultState={sceneRoom:'dining',bulb:'clear',bulbW:60,kelvin:2700,phiGuides:false,ribMode:'outline',ribWidth:30,preset:'glocke',count:24,dia:400,height:340,inner:55,variation:'same',alternate:80,thick:3,clearance:.2,kerf:.15,joint:24,ringWidth:28,socketType:'E27',socketHole:40,mountHoles:0,boltCircle:54,boltHoleDia:4,material:'Pappelsperrholz',bedW:600,bedH:400,spacing:6,smooth:true,points:[.45,.83,1,.95,.68]};
+const defaultState={sceneRoom:'dining',bulb:'clear',bulbW:60,kelvin:2700,hangOffset:0,phiGuides:false,ribMode:'outline',ribWidth:30,preset:'glocke',count:24,dia:400,height:340,inner:55,variation:'same',alternate:80,thick:3,clearance:.2,kerf:.15,joint:24,ringWidth:28,socketType:'E27',socketHole:40,mountHoles:0,boltCircle:54,boltHoleDia:4,material:'Pappelsperrholz',bedW:600,bedH:400,spacing:6,smooth:true,points:[.45,.83,1,.95,.68]};
 const presets={glocke:[.45,.83,1,.95,.68],teller:[.25,.8,1,.8,.25],zylinder:[1,1,1,1,1],kegel:[.43,.55,.7,.84,1],sand:[.95,.65,.45,.65,.95],welle:[.58,1,.65,.94,.55],custom:null};
 const presetNames={glocke:'Glocke',teller:'Teller',zylinder:'Zylinder',kegel:'Kegel',sand:'Sanduhr',welle:'Welle',custom:'Freie Form'};
 const nums=['Oben','¼ Höhe','Mitte','¾ Höhe','Unten'];
@@ -214,10 +225,10 @@ const precis=(v,n=1)=>Number(v).toFixed(n).replace(/\.0$/,'').replace('.',',');
 const mm=(v)=>precis(v,1)+' mm';
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const round=(x)=>Math.round(x*10000)/10000;
-function normalize(v){const o={...defaultState,...v}; for(const k of [...rangeFields,'bedW','bedH','socketHole','boltCircle','boltHoleDia']){o[k]=Number(o[k]);if(!Number.isFinite(o[k]))o[k]=defaultState[k]};o.ribWidth=clamp(o.ribWidth,15,100);if(!['outline','solid'].includes(o.ribMode))o.ribMode='outline';o.count=Math.round(clamp(o.count,8,48));o.dia=clamp(o.dia,180,800);o.height=clamp(o.height,80,650);o.inner=clamp(o.inner,40,130);o.alternate=clamp(o.alternate,60,95);o.thick=clamp(o.thick,2,8);o.clearance=clamp(o.clearance,0,.6);o.kerf=clamp(o.kerf,0,.4);o.joint=clamp(o.joint,16,36);o.ringWidth=clamp(o.ringWidth,20,42);o.spacing=clamp(o.spacing,1,25);o.socketHole=clamp(o.socketHole,10,70);o.boltCircle=clamp(o.boltCircle,36,120);o.boltHoleDia=clamp(o.boltHoleDia,2,8);o.mountHoles=[0,2,4].includes(+o.mountHoles)?+o.mountHoles:0;if(!['E14','E27','custom'].includes(o.socketType))o.socketType='E27';o.bedW=clamp(o.bedW,180,3000);o.bedH=clamp(o.bedH,180,2000);o.points=Array.isArray(o.points)&&o.points.length===5?o.points.map(x=>clamp(Number(x)||.15,.15,1)):[...defaultState.points];o.smooth=!!o.smooth; if(!(o.preset in presets))o.preset='glocke';if(!['same','alternate'].includes(o.variation))o.variation='same';if(!['dining','living','bedroom','loft'].includes(o.sceneRoom))o.sceneRoom='dining';if(!['clear','matte','filament','globe'].includes(o.bulb))o.bulb='clear';o.bulbW=[20,40,60,80,100].includes(+o.bulbW)?+o.bulbW:60;o.kelvin=[2200,2700,3000,4000].includes(+o.kelvin)?+o.kelvin:2700;o.phiGuides=!!o.phiGuides;return o}
+function normalize(v){const o={...defaultState,...v}; for(const k of [...rangeFields,'bedW','bedH','socketHole','boltCircle','boltHoleDia']){o[k]=Number(o[k]);if(!Number.isFinite(o[k]))o[k]=defaultState[k]};o.ribWidth=clamp(o.ribWidth,15,100);if(!['outline','solid'].includes(o.ribMode))o.ribMode='outline';o.count=Math.round(clamp(o.count,8,48));o.dia=clamp(o.dia,180,800);o.height=clamp(o.height,80,650);o.inner=clamp(o.inner,40,130);o.alternate=clamp(o.alternate,60,95);o.thick=clamp(o.thick,2,8);o.clearance=clamp(o.clearance,0,.6);o.kerf=clamp(o.kerf,0,.4);o.joint=clamp(o.joint,16,36);o.ringWidth=clamp(o.ringWidth,20,42);o.spacing=clamp(o.spacing,1,25);o.socketHole=clamp(o.socketHole,10,70);o.boltCircle=clamp(o.boltCircle,36,120);o.boltHoleDia=clamp(o.boltHoleDia,2,8);o.mountHoles=[0,2,4].includes(+o.mountHoles)?+o.mountHoles:0;if(!['E14','E27','custom'].includes(o.socketType))o.socketType='E27';o.bedW=clamp(o.bedW,180,3000);o.bedH=clamp(o.bedH,180,2000);o.points=Array.isArray(o.points)&&o.points.length===5?o.points.map(x=>clamp(Number(x)||.15,.15,1)):[...defaultState.points];o.smooth=!!o.smooth; if(!(o.preset in presets))o.preset='glocke';if(!['same','alternate'].includes(o.variation))o.variation='same';if(!['dining','living','bedroom','loft'].includes(o.sceneRoom))o.sceneRoom='dining';if(!['clear','matte','filament','globe'].includes(o.bulb))o.bulb='clear';o.bulbW=[20,40,60,80,100].includes(+o.bulbW)?+o.bulbW:60;o.kelvin=[2200,2700,3000,4000].includes(+o.kelvin)?+o.kelvin:2700;o.phiGuides=!!o.phiGuides;o.hangOffset=clamp(Math.round((Number(o.hangOffset)||0)/25)*25,-250,250);return o}
 function save(){try{localStorage.setItem('lamella-studio-v1',JSON.stringify(S))}catch(e){}}
 function notify(msg){const e=$('toast');e.textContent=msg;e.classList.add('show');clearTimeout(notify.t);notify.t=setTimeout(()=>e.classList.remove('show'),3100)}
-function wireControls(){for(let k of [...rangeFields,'preset','variation','ribMode','material','bedW','bedH','socketType','socketHole','mountHoles','boltCircle','boltHoleDia']){const el=$(k);el.addEventListener(['bedW','bedH','socketHole','boltCircle','boltHoleDia'].includes(k)?'change':'input',()=>{if(k==='preset'){S.preset=el.value;if(presets[el.value]){S.points=[...presets[el.value]];if(el.value==='teller'){S.height=130;S.dia=Math.max(S.dia,400)}if(el.value==='zylinder'){S.height=340}}}else if(['variation','ribMode','material','socketType'].includes(k)){S[k]=el.value;if(k==='socketType'&&el.value!=='custom')S.socketHole=el.value==='E14'?28:40}else{S[k]=Number(el.value);if(k==='socketHole'&&((S.socketType==='E14'&&S[k]!==28)||(S.socketType==='E27'&&S[k]!==40)))S.socketType='custom'}S=normalize(S);scheduleRefresh()})} $('smooth').addEventListener('change',()=>{S.smooth=$('smooth').checked;refresh()});$('btnSave').addEventListener('click',()=>downloadText('LAMELLA_Projekt.json',JSON.stringify({app:'LAMELLA Studio',version:9,settings:S},null,2),'application/json'));$('btnLoad').addEventListener('click',()=>$('fileInput').click());$('fileInput').addEventListener('change',async(e)=>{const f=e.target.files?.[0];if(!f)return;try{const data=JSON.parse(await f.text());S=normalize(data.settings||data);refresh();notify('Projekt geladen')}catch(err){notify('Keine gültige Projektdatei')}e.target.value='' });
+function wireControls(){for(let k of [...rangeFields,'preset','variation','ribMode','material','bedW','bedH','socketType','socketHole','mountHoles','boltCircle','boltHoleDia']){const el=$(k);el.addEventListener(['bedW','bedH','socketHole','boltCircle','boltHoleDia'].includes(k)?'change':'input',()=>{if(k==='preset'){S.preset=el.value;if(presets[el.value]){S.points=[...presets[el.value]];if(el.value==='teller'){S.height=130;S.dia=Math.max(S.dia,400)}if(el.value==='zylinder'){S.height=340}}}else if(['variation','ribMode','material','socketType'].includes(k)){S[k]=el.value;if(k==='socketType'&&el.value!=='custom')S.socketHole=el.value==='E14'?28:40}else{S[k]=Number(el.value);if(k==='socketHole'&&((S.socketType==='E14'&&S[k]!==28)||(S.socketType==='E27'&&S[k]!==40)))S.socketType='custom'}S=normalize(S);scheduleRefresh()})} $('smooth').addEventListener('change',()=>{S.smooth=$('smooth').checked;refresh()});$('btnSave').addEventListener('click',()=>downloadText('LAMELLA_Projekt.json',JSON.stringify({app:'LAMELLA Studio',version:10,settings:S},null,2),'application/json'));$('btnLoad').addEventListener('click',()=>$('fileInput').click());$('fileInput').addEventListener('change',async(e)=>{const f=e.target.files?.[0];if(!f)return;try{const data=JSON.parse(await f.text());S=normalize(data.settings||data);refresh();notify('Projekt geladen')}catch(err){notify('Keine gültige Projektdatei')}e.target.value='' });
  $('tab3d').addEventListener('click',()=>setTab('3d'));$('tabRoom').addEventListener('click',()=>setTab('room'));$('tabCut').addEventListener('click',()=>setTab('cut'));
  $('resetView').onclick=()=>{view={yaw:.53,pitch:.27,zoom:1};draw3d()};$('zoomPlus').onclick=()=>{view.zoom=clamp(view.zoom*1.15,.55,2.4);draw3d()};$('zoomMinus').onclick=()=>{view.zoom=clamp(view.zoom/1.15,.55,2.4);draw3d()};
  const canvas=$('modelCanvas');let pointer=null;canvas.addEventListener('pointerdown',e=>{pointer={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!pointer||pointer.id!==e.pointerId)return;view.yaw+=(e.clientX-pointer.x)*.012;view.pitch=clamp(view.pitch+(e.clientY-pointer.y)*.006,-.8,1.05);pointer.x=e.clientX;pointer.y=e.clientY;draw3d()});canvas.addEventListener('pointerup',()=>pointer=null);canvas.addEventListener('pointercancel',()=>pointer=null);canvas.addEventListener('wheel',e=>{e.preventDefault();view.zoom=clamp(view.zoom*(e.deltaY>0?.93:1.07),.55,2.4);draw3d()},{passive:false});
@@ -245,8 +256,10 @@ function wirePhiAndScene(){
  $('phiGuides').onchange=e=>{S.phiGuides=e.target.checked;save();drawProfile();updatePhi()};
  const groups=[['roomChoices','sceneRoom',[['dining','Esszimmer'],['living','Wohnzimmer'],['bedroom','Schlafzimmer'],['loft','Loft / Café']]],['bulbChoices','bulb',[['clear','Klar'],['matte','Matt'],['filament','Filament'],['globe','Globe']]],['powerChoices','bulbW',[[20,'20 W'],[40,'40 W'],[60,'60 W'],[80,'80 W'],[100,'100 W']]],['kelvinChoices','kelvin',[[2200,'2200 K'],[2700,'2700 K'],[3000,'3000 K'],[4000,'4000 K']]]];
  for(const [id,key,choices] of groups){const parent=$(id);for(const [val,name] of choices){const btn=document.createElement('button');btn.type='button';btn.className='v9-chip';btn.textContent=name;btn.dataset.key=key;btn.dataset.value=String(val);btn.onclick=()=>{S[key]=typeof val==='number'?val:val;save();updateSceneControls();drawRoom()};parent.appendChild(btn)}}
+ $('hangOffset').value=String(S.hangOffset);
+ $('hangOffset').addEventListener('input',e=>{S.hangOffset=Number(e.target.value);save();updateSceneControls();drawRoom()});
  const lamps={20:200,40:470,60:806,80:1055,100:1521};
- window.updateSceneControls=()=>{for(const node of document.querySelectorAll('.v9-chip'))node.setAttribute('aria-pressed',String(String(S[node.dataset.key])===node.dataset.value));$('bulbSummary').textContent=`${S.bulbW} W Glühlampen-Vergleich · ca. ${lamps[S.bulbW]} lm · ${S.kelvin} K. Tatsächliche LED-Leistungsaufnahme hängt vom Produkt ab. Die Schatten sind illustrativ und nicht lichttechnisch berechnet.`;updatePhi()};
+ window.updateSceneControls=()=>{for(const node of document.querySelectorAll('.v9-chip'))node.setAttribute('aria-pressed',String(String(S[node.dataset.key])===node.dataset.value));$('bulbSummary').textContent=`${S.bulbW} W Glühlampen-Vergleich · ca. ${lamps[S.bulbW]} lm · ${S.kelvin} K. Tatsächliche LED-Leistungsaufnahme hängt vom Produkt ab. Die Schatten sind illustrativ und nicht lichttechnisch berechnet.`;$('hangOffset').value=String(S.hangOffset);$('hangOffsetLabel').textContent=S.hangOffset===0?'Standard':S.hangOffset>0?`${S.hangOffset} mm höher`:`${Math.abs(S.hangOffset)} mm tiefer`;updatePhi()};
  updateSceneControls();
  if(typeof ResizeObserver==='function')new ResizeObserver(()=>{if(tab==='room')drawRoom()}).observe($('roomCanvas'));
  window.addEventListener('resize',()=>{if(tab==='room')drawRoom()});
@@ -513,7 +526,7 @@ function exportCurrent(type){if(!canExport())return;const file=`LAMELLA_Bogen_${
 const crcTab=(()=>{let t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xedb88320^(c>>>1):c>>>1;t.push(c>>>0)}return t})();
 function crc32(b){let c=0xffffffff;for(let v of b)c=crcTab[(c^v)&255]^(c>>>8);return(c^0xffffffff)>>>0}
 function zipArchive(files){const enc=new TextEncoder(),entries=[],local=[],central=[];let offset=0;function uint16(v){return[v&255,v>>>8&255]}function uint32(v){return[v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255]}for(let f of files){const name=enc.encode(f.name),data=enc.encode(f.content),crc=crc32(data);const a=new Uint8Array([...uint32(0x04034b50),...uint16(20),...uint16(0x0800),...uint16(0),...uint16(0),...uint16(0),...uint32(crc),...uint32(data.length),...uint32(data.length),...uint16(name.length),...uint16(0),...name]);local.push(a,data);const b=new Uint8Array([...uint32(0x02014b50),...uint16(20),...uint16(20),...uint16(0x0800),...uint16(0),...uint16(0),...uint16(0),...uint32(crc),...uint32(data.length),...uint32(data.length),...uint16(name.length),...uint16(0),...uint16(0),...uint16(0),...uint16(0),...uint32(0),...uint32(offset),...name]);central.push(b);offset+=a.length+data.length;entries.push(f.name)}const cdSize=central.reduce((a,b)=>a+b.length,0);const end=new Uint8Array([...uint32(0x06054b50),...uint16(0),...uint16(0),...uint16(files.length),...uint16(files.length),...uint32(cdSize),...uint32(offset),...uint16(0)]);return new Blob([...local,...central,end],{type:'application/zip'})}
-function exportZip(type){if(!canExport())return;const ext=type==='svg'?'svg':'dxf';const fs=sheets.map((_,i)=>({name:`LAMELLA_Bogen_${String(i+1).padStart(2,'0')}.${ext}`,content:type==='svg'?svgSheet(i,false):dxfSheet(i)}));fs.push({name:'FERTIGUNGSHINWEISE.txt',content:`LAMELLA Studio V6 | Fertigungsdaten\n${S.count} Lamellen | Ø maximal ${S.dia} mm | Höhe ${S.height} mm\nMaterial: ${S.material} | Materialstärke: ${S.thick} mm\nSchlitz im CAD: ${precis(slotWidth(),2)} mm | Steckspiel: ${S.clearance} mm | Schnittfuge: ${S.kerf} mm\nLamellenmodus: ${S.ribMode==='outline'?'Konturstreifen, radial '+S.ribWidth+' mm':'Vollflächig'}\nSteckringe: 2 Stück | oben mit integrierter Vier-Speichen-Nabe und Zentralbohrung, unten offen\nFassungsaufnahme: ${S.socketType} | Bohrung Durchmesser ${S.socketHole} mm | Schraubbohrungen ${S.mountHoles} Stk.\n${S.mountHoles?'Lochkreis '+S.boltCircle+' mm | Schraublochdurchmesser '+S.boltHoleDia+' mm\n':''}Lasertisch: ${S.bedW} x ${S.bedH} mm | ${sheets.length} Schnittbögen\nMindestabstand zwischen Teilen: ${S.spacing} mm | Konturbasiertes Nesting, 0°/90°/180°/270°\n\nACHTUNG: Die Bohrung ist nur eine Aufnahme für eine passende Fassung mit Klemmringen, keine geprüfte tragende Aufhängung. E14/E27 sind Richtwerte; Fassung, Gewinde und Gegenring nachmessen. 1:1-Abmessungen und Passungen zunächst mit Testschnitten überprüfen. Hitzebeständigkeit, elektrische Sicherheit, Brandverhalten und Tragfähigkeit müssen vor Nutzung durch Fachkundige geprüft werden.\n`});fs.push({name:'LAMELLA_Projekt.json',content:JSON.stringify({app:'LAMELLA Studio',version:9,settings:S},null,2)});downloadBlob(`LAMELLA_${ext.toUpperCase()}_${sheets.length}_Boegen.zip`,zipArchive(fs));notify(`ZIP mit ${sheets.length} ${ext.toUpperCase()}-Bögen erstellt`)}
+function exportZip(type){if(!canExport())return;const ext=type==='svg'?'svg':'dxf';const fs=sheets.map((_,i)=>({name:`LAMELLA_Bogen_${String(i+1).padStart(2,'0')}.${ext}`,content:type==='svg'?svgSheet(i,false):dxfSheet(i)}));fs.push({name:'FERTIGUNGSHINWEISE.txt',content:`LAMELLA Studio V6 | Fertigungsdaten\n${S.count} Lamellen | Ø maximal ${S.dia} mm | Höhe ${S.height} mm\nMaterial: ${S.material} | Materialstärke: ${S.thick} mm\nSchlitz im CAD: ${precis(slotWidth(),2)} mm | Steckspiel: ${S.clearance} mm | Schnittfuge: ${S.kerf} mm\nLamellenmodus: ${S.ribMode==='outline'?'Konturstreifen, radial '+S.ribWidth+' mm':'Vollflächig'}\nSteckringe: 2 Stück | oben mit integrierter Vier-Speichen-Nabe und Zentralbohrung, unten offen\nFassungsaufnahme: ${S.socketType} | Bohrung Durchmesser ${S.socketHole} mm | Schraubbohrungen ${S.mountHoles} Stk.\n${S.mountHoles?'Lochkreis '+S.boltCircle+' mm | Schraublochdurchmesser '+S.boltHoleDia+' mm\n':''}Lasertisch: ${S.bedW} x ${S.bedH} mm | ${sheets.length} Schnittbögen\nMindestabstand zwischen Teilen: ${S.spacing} mm | Konturbasiertes Nesting, 0°/90°/180°/270°\n\nACHTUNG: Die Bohrung ist nur eine Aufnahme für eine passende Fassung mit Klemmringen, keine geprüfte tragende Aufhängung. E14/E27 sind Richtwerte; Fassung, Gewinde und Gegenring nachmessen. 1:1-Abmessungen und Passungen zunächst mit Testschnitten überprüfen. Hitzebeständigkeit, elektrische Sicherheit, Brandverhalten und Tragfähigkeit müssen vor Nutzung durch Fachkundige geprüft werden.\n`});fs.push({name:'LAMELLA_Projekt.json',content:JSON.stringify({app:'LAMELLA Studio',version:10,settings:S},null,2)});downloadBlob(`LAMELLA_${ext.toUpperCase()}_${sheets.length}_Boegen.zip`,zipArchive(fs));notify(`ZIP mit ${sheets.length} ${ext.toUpperCase()}-Bögen erstellt`)}
 function canExport(){if(!sheets.length||issues.some(x=>x.error)){notify('Bitte erst die Hinweise zur Geometrie / Plattengröße beheben');return false}return true}
 function setTab(v){tab=v;$('modelWrap').classList.toggle('hidden',v!=='3d');$('roomWrap').classList.toggle('hidden',v!=='room');$('cutWrap').classList.toggle('hidden',v!=='cut');$('sceneOptions').hidden=v!=='room';$('tab3d').classList.toggle('active',v==='3d');$('tabRoom').classList.toggle('active',v==='room');$('tabCut').classList.toggle('active',v==='cut');if(v==='cut')renderSheetView();else if(v==='room')requestAnimationFrame(drawRoom);else requestAnimationFrame(draw3d)}
 function changeSheet(delta){sheetIndex=clamp(sheetIndex+delta,0,Math.max(0,sheets.length-1));renderSheetView()}
@@ -559,6 +572,25 @@ function drawProfile(){
  svg.dataset.pxPerMm=String(pxPerMm);svg.innerHTML=markup
 }
 
+// Scene references: pixel width of illustrated furniture / assumed physical furniture width.
+// These mm/pixel values make the lamp size consistent relative to each room's furnishings.
+const sceneFurniture={
+ dining:{widthPx:548,widthMm:1800,topY:448,clearanceMm:650,label:'Esstisch ca. 1,80 m',surface:'Tischplatte'},
+ living:{widthPx:531,widthMm:2200,topY:401,clearanceMm:780,label:'Sofa ca. 2,20 m',surface:'Sofa'},
+ bedroom:{widthPx:474,widthMm:1800,topY:434,clearanceMm:820,label:'Bett ca. 1,80 m',surface:'Bett'},
+ loft:{widthPx:440,widthMm:1800,topY:431,clearanceMm:650,label:'Tisch ca. 1,80 m',surface:'Tischplatte'}
+};
+function lampInRoom(){
+ const furniture=sceneFurniture[S.sceneRoom];
+ const scale=furniture.widthPx/furniture.widthMm;
+ const targetGapMm=furniture.clearanceMm+S.hangOffset;
+ const heightPx=S.height*scale;
+ // Ceiling at about y=64. Leave at least 18px for lamp canopy/cable.
+ const topY=Math.max(86,furniture.topY-targetGapMm*scale-heightPx);
+ const bottomY=topY+heightPx;
+ const actualGapMm=Math.round((furniture.topY-bottomY)/scale);
+ return {furniture,scale,topY,bottomY,actualGapMm,limited:actualGapMm<targetGapMm-2};
+}
 function drawRoom(){
  const canvas=$('roomCanvas'),rect=canvas.getBoundingClientRect();if(rect.width<10||rect.height<10)return;
  const dpr=Math.min(2,window.devicePixelRatio||1);canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);
@@ -585,6 +617,9 @@ function drawRoom(){
  else {rectFill(693,127,139,203,'#ebe4d6');rectFill(703,137,119,183,grad(0,137,0,330,[[0,'#9cb7b6'],[1,'#c8c9af']]));rectFill(759,137,5,183,'#f4eade');rectFill(703,237,119,5,'#f4eade');rectFill(690,325,150,11,'#e2d5be');poly([[230,170],[343,164],[343,282],[230,285]],'#e2d7c8','#8a817b');rectFill(249,184,75,82,theme[3]);ellipse(285,218,23,31,'#d8b892')}
  // Ceiling to floor ambient light gradient (brightness driven by W-equivalent).
  let glow=ctx.createRadialGradient(500,175,22,500,175,520);glow.addColorStop(0,rgb(.06+.19*dim));glow.addColorStop(.4,rgb(.04+.14*dim));glow.addColorStop(1,rgb(0));rectFill(0,60,1000,540,glow);
+ // Physical lamella scale follows a room-specific reference furniture measurement.
+ const lamp=lampInRoom(),factor=lamp.scale,top=lamp.topY,cx=500;
+ const lightY=top+S.height*factor*.48,outerRadiusPx=S.dia*factor/2;
  // Lamella-dependent shadow rays from visible pendant toward ceiling, walls and ground.
  let n=S.count,profile=.65+.35*valueAt(.5),widthAlpha=S.ribMode==='solid'?1.25:Math.max(.5,S.ribWidth/35);
  const hard={clear:.85,matte:.28,filament:.92,globe:.5}[S.bulb];
@@ -592,8 +627,8 @@ function drawRoom(){
  for(let i=0;i<n;i++){
   let a=Math.PI*2*i/n+.15,cs=Math.cos(a),sn=Math.sin(a);
   const xx=500+cs*(510+60*profile),yy=86+sn*240;
-  let g=ctx.createLinearGradient(500,110,xx,yy);g.addColorStop(0,'rgba(48,34,19,0)');g.addColorStop(.2,`rgba(36,29,22,${(.05+.13*hard*dim)*widthAlpha})`);g.addColorStop(1,'rgba(38,30,24,0)');
-  ctx.beginPath();ctx.moveTo(500+cs*95,108+sn*30);ctx.quadraticCurveTo(500+cs*255,65+sn*120,xx,yy);
+  let g=ctx.createLinearGradient(500,lightY,xx,yy);g.addColorStop(0,'rgba(48,34,19,0)');g.addColorStop(.2,`rgba(36,29,22,${(.05+.13*hard*dim)*widthAlpha})`);g.addColorStop(1,'rgba(38,30,24,0)');
+  ctx.beginPath();ctx.moveTo(500+cs*outerRadiusPx*.85,lightY+sn*S.height*factor*.16);ctx.quadraticCurveTo(500+cs*255,lightY*.55+sn*120,xx,yy);
   ctx.strokeStyle=g;ctx.lineWidth=(S.ribMode==='solid'?10:6)*widthAlpha*(hard>.7?1:1.7);ctx.stroke();
  }
  // floor shadow streaks, softened for matte bulb.
@@ -625,10 +660,9 @@ function drawRoom(){
   for(let i=0;i<3;i++){let x=344+i*154;rectFill(x,475,13,65,'#4a4c48');ellipse(x+7,469,35,14,'#b2a391')}
  }
  // Pendant cable and canopy.
- ctx.strokeStyle='#494540';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(500,49);ctx.lineTo(500,116);ctx.stroke();ellipse(500,49,25,7,'#71665c');
- // Actual profile geometry is reused for a 3D-like representation of the lamp.
- const factor=Math.min(.58,365/Math.max(S.height,180),410/Math.max(S.dia,200));
- const top=117, cx=500;const project=(r,a,y)=>[cx+Math.cos(a)*r*factor,top+y*factor+Math.sin(a)*r*factor*.14];
+ ctx.strokeStyle='#494540';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(500,49);ctx.lineTo(500,top);ctx.stroke();ellipse(500,49,25,7,'#71665c');
+ // The design keeps its CAD dimensions; only the drawing scale follows the furniture.
+ const project=(r,a,y)=>[cx+Math.cos(a)*r*factor,top+y*factor+Math.sin(a)*r*factor*.14];
  const far=[],near=[];
  for(let i=0;i<S.count;i++){let a=2*Math.PI*i/S.count+.16,v=Math.sin(a),ratio=S.variation==='alternate'&&i%2?S.alternate/100:1;(v<0?far:near).push({a,ratio,v})}
  far.sort((x,y)=>x.v-y.v);near.sort((x,y)=>x.v-y.v);
@@ -643,7 +677,9 @@ function drawRoom(){
  // subtle footer label embedded in illustration.
  rectFill(0,567,1000,33,'rgba(18,27,32,.72)');ctx.fillStyle='#f5e8ce';ctx.font='14px system-ui';
  const name={dining:'ESSZIMMER',living:'WOHNZIMMER',bedroom:'SCHLAFZIMMER',loft:'LOFT / CAFÉ'}[S.sceneRoom];
- ctx.textAlign='center';ctx.fillText(`${name}  ·  ${S.count} LAMELLEN  ·  ${S.bulbW} W-VERGL.  ·  ${S.kelvin} K`,500,589);ctx.textAlign='start'
+ ctx.textAlign='center';ctx.fillText(`${name}  ·  Ø ${S.dia} MM / H ${S.height} MM  ·  ${S.bulbW} W-VERGL.  ·  ${S.kelvin} K`,500,589);ctx.textAlign='start';
+ const sizeInfo=$('roomScaleInfo');if(sizeInfo)sizeInfo.textContent=`Ø ${S.dia} mm · H ${S.height} mm · ${lamp.furniture.label}`;
+ const hangInfo=$('hangOffsetInfo');if(hangInfo)hangInfo.textContent=`Unterkante ca. ${lamp.actualGapMm} mm über ${lamp.furniture.surface} · ${lamp.limited?'für die verfügbare Raumhöhe automatisch tiefer gehängt':'Möbelmaße als Näherungswerte'}`;
 }
 function draw3d(){const can=$('modelCanvas');const rect=can.getBoundingClientRect();if(rect.width<10||rect.height<10)return;const DPR=Math.min(2,window.devicePixelRatio||1),W=rect.width,H=rect.height;can.width=Math.round(W*DPR);can.height=Math.round(H*DPR);const ctx=can.getContext('2d');ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearRect(0,0,W,H);
 const sc=Math.min((W-42)/(S.dia*1.14),(H-55)/(S.height*1.13))*view.zoom;const cy=H*.52,cx=W*.5;let pitch=view.pitch,yaw=view.yaw;
