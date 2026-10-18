@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111923">
-<title>LAMELLA Studio V7 · Kontrastreiche Schnittvorschau</title>
+<title>LAMELLA Studio V8 · Optimiertes Layout</title>
 <style>
 :root{--bg:#0b1119;--pane:#121b26;--pane2:#172230;--edge:#2b3a48;--text:#f0f3f4;--sub:#a6b5c4;--muted:#718495;--accent:#ffb55a;--accent2:#fa8f4c;--teal:#86dfcf;--bad:#ff8c8c;--sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.35;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -31,12 +31,87 @@ select,input[type=number]{background:#0c1520;color:var(--text);border:1px solid 
 #busyIndicator{font-size:11px;color:#b5c5c9;padding:6px 0;min-height:27px}
 @media(max-width:780px){.tabbar button{font-size:13px;min-height:42px}.viewport-tools button{min-width:48px;min-height:48px}.switchrow{min-height:48px}.switchrow input{width:24px;height:24px}.btn{min-height:49px}.profile-svg{height:270px}}
 @media(max-width:470px){.profile-svg{height:260px}.modelwrap{height:380px}.btnrow{grid-template-columns:1fr 1fr}.brandtitle{letter-spacing:.14em}header .meta{display:none}}
+
+/* V8: Desktop-Arbeitsbereich oben, Einstellungen als ausgeglichene Karten statt leerer Mittelspalte */
+.app.layout-v8{display:block;max-width:1740px;min-height:auto;margin:0 auto;padding:0 22px 20px}
+.layout-v8 .main{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);gap:15px 22px;align-items:start;margin:20px 0 0;padding:24px;background:radial-gradient(ellipse at 46% 8%,#202c38,#121c26 61%,#0f1822);border:1px solid var(--edge);border-radius:19px}
+.layout-v8 .main>.eyebrow{grid-column:1/-1;margin:0 0 3px}
+.layout-v8 .main>#modelWrap,.layout-v8 .main>#cutWrap{grid-column:1;grid-row:2;min-width:0;margin:0}
+.layout-v8 .main>#busyIndicator{grid-column:1/-1;grid-row:3;padding:0;min-height:18px}
+.layout-v8 .main>.editorwrap{grid-column:2;grid-row:2;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin:0;gap:14px;min-width:0;align-items:stretch}
+.layout-v8 .main .subpanel{min-width:0;padding:17px;background:#14212d}
+.layout-v8 .main .modelwrap{height:465px;min-height:465px}
+.layout-v8 .main #cutWrap{height:465px!important;min-height:465px!important;justify-content:center;padding:15px!important}
+.layout-v8 .main .profile-svg{height:300px}
+.layout-v8 .settings-area{margin:22px 0 0}
+.settings-heading{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:0 0 17px;padding:1px 3px}
+.settings-heading h2{font-size:22px;line-height:1.3;margin:3px 0 4px;font-weight:770}
+.settings-heading p{font-size:13px;line-height:1.5;margin:0;color:var(--sub)}
+.jump-preview{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border:1px solid #44596c;border-radius:10px;padding:11px 15px;color:#ecf6fa;background:#263848;text-decoration:none;font-size:13px;font-weight:650}
+.jump-preview:hover{background:#34495c}
+.layout-v8 .settings-columns{columns:3 310px;column-gap:17px;column-fill:balance;}
+.layout-v8 .settings-columns>.panel{break-inside:avoid;display:inline-block;vertical-align:top;width:100%;margin:0 0 17px;padding:20px 22px;background:var(--pane);border:1px solid #304353;border-radius:15px;overflow:hidden;box-shadow:0 4px 14px #00000010}
+.layout-v8 .settings-columns>.panel .section-title{margin-bottom:16px}
+.layout-v8 .settings-columns>.panel .frow label{min-width:0}
+.layout-v8 .settings-columns .cutpreview svg{max-height:240px}
+@media(max-width:1390px){
+ .layout-v8 .main{grid-template-columns:1fr;gap:14px}
+ .layout-v8 .main>.eyebrow{grid-column:1;grid-row:1}
+ .layout-v8 .main>#modelWrap,.layout-v8 .main>#cutWrap{grid-column:1;grid-row:2}
+ .layout-v8 .main>.editorwrap{grid-column:1;grid-row:3}
+ .layout-v8 .main>#busyIndicator{grid-column:1;grid-row:4}
+ .layout-v8 .main .modelwrap{height:450px;min-height:350px}
+ .layout-v8 .main #cutWrap{height:auto!important;min-height:350px!important}
+}
+@media(max-width:1050px){.layout-v8 .settings-columns{columns:2 300px}}
+@media(max-width:780px){
+ .app.layout-v8{padding:0 12px 18px}
+ .layout-v8 .main{margin:11px 0 0;padding:14px;display:flex;flex-direction:column;gap:10px;border-radius:15px}
+ .layout-v8 .main>.eyebrow,.layout-v8 .main>#modelWrap,.layout-v8 .main>#cutWrap,.layout-v8 .main>.editorwrap,.layout-v8 .main>#busyIndicator{width:100%}
+ .layout-v8 .main>.editorwrap{display:grid;grid-template-columns:1fr;gap:12px}
+ .layout-v8 .main .modelwrap{height:390px;min-height:300px}
+ .layout-v8 .main #cutWrap{height:auto!important;min-height:300px!important}
+ .layout-v8 .main .profile-svg{height:290px}
+ .layout-v8 .settings-columns{columns:1;}
+ .settings-heading{align-items:flex-start;flex-direction:column}
+ .settings-heading h2{font-size:20px}
+ .layout-v8 .settings-columns>.panel{margin:0 0 12px;padding:19px 17px}
+}
+@media(max-width:470px){.layout-v8 .main .modelwrap{height:360px}.layout-v8 .main .profile-svg{height:270px}.layout-v8 .main>.eyebrow{gap:9px}}
+
+
+/* Balanced desktop card columns: 01–03 | 04,05,08 | 06,07. */
+@media(min-width:1051px){
+ .layout-v8 .settings-columns>.panel:nth-child(4),
+ .layout-v8 .settings-columns>.panel:nth-child(7){break-before:column}
+}
+@media(max-width:780px){
+ .layout-v8 .settings-columns{display:flex;flex-direction:column}
+ .layout-v8 .settings-columns>.panel:nth-child(6){order:8}
+ .layout-v8 .settings-columns>.panel:nth-child(7){order:6}
+ .layout-v8 .settings-columns>.panel:nth-child(8){order:7}
+}
 </style>
 </head>
 <body>
-<header><div class="brand"><div class="glyph">◖◗</div><div><div class="brandtitle">LAMELLA STUDIO</div><div class="brandsub">Stecklampen · Entwurf & Laserschnitt</div></div></div><div class="meta"><span class="pill">● V7 · Mobil</span><span class="metaextra">Einheiten: Millimeter</span></div></header>
-<div class="app">
-<aside class="left">
+<header><div class="brand"><div class="glyph">◖◗</div><div><div class="brandtitle">LAMELLA STUDIO</div><div class="brandsub">Stecklampen · Entwurf & Laserschnitt</div></div></div><div class="meta"><span class="pill">● V8 · Desktop & Mobil</span><span class="metaextra">Einheiten: Millimeter</span></div></header>
+<div class="app layout-v8">
+<main class="main" id="arbeitsbereich">
+
+<div class="iosnotice" id="browserHelp"><b>iPhone-Hinweis:</b> Wenn du diese HTML-Datei direkt in ChatGPT/Dateien als Vorschau öffnest, können die Bedienfunktionen blockiert werden. Für die volle Funktion die Web-App über eine <b>https://-Adresse in Safari</b> öffnen. <span id="mobileStatus">JavaScript wurde noch nicht gestartet.</span></div>
+<div class="eyebrow"><div><span class="muted">ENTWURF</span><strong style="font-size:14px;margin-left:8px">Individuelle Pendelleuchte</strong></div><div class="tabbar"><button id="tab3d" class="active" type="button">3D-Modell</button><button id="tabCut" type="button">Schnittbogen</button></div></div>
+<div class="modelwrap" id="modelWrap"><canvas id="modelCanvas" aria-label="Drehbare dreidimensionale Vorschau der Lamellenleuchte"></canvas><div id="jsFallback">Die Vorschau ist hier nicht aktiv.<br><strong>Bitte die Web-App in Safari öffnen.</strong><br>Die ChatGPT-Dateivorschau führt das Zeichenprogramm nicht aus.</div><div class="viewport-caption">LIVE-VORSCHAU<b id="modelTitle">Glocke · 24 Lamellen</b></div><div class="viewport-bottom"><span id="viewportInfo">Mit dem Finger drehen · Ansicht verändern</span><div class="viewport-tools"><button type="button" id="resetView" title="Ansicht zurücksetzen">⟲</button><button type="button" id="zoomMinus" title="Verkleinern">−</button><button type="button" id="zoomPlus" title="Vergrößern">+</button></div></div></div>
+<div class="modelwrap hidden" id="cutWrap" style="height:auto;min-height:350px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center"><div id="cutMain" style="width:min(100%,740px)"></div><div class="sheetbar" style="width:min(100%,740px)"><button id="mainPrev">← Bogen zurück</button><span id="mainSheetNo"></span><button id="mainNext">Bogen weiter →</button></div></div>
+<div id="busyIndicator" aria-live="polite"></div><div class="editorwrap">
+<div class="subpanel"><h3>Lamellenkontur frei gestalten</h3><div class="editor-note" id="profileHelp">Ziehe die fünf orangefarbenen Punkte waagerecht. Die äußere Kontur wird maßstäblich gezeigt und direkt für den Zuschnitt übernommen.</div><svg id="profileSvg" class="profile-svg" viewBox="0 0 320 400" role="img" aria-label="Bearbeitbares Lamellenprofil mit fünf Ziehpunkten"><text x="20" y="50" fill="#ffca87" font-size="15">Vorschau deaktiviert:</text><text x="20" y="77" fill="#ffca87" font-size="12">Bitte die Web-App in Safari öffnen.</text></svg><div class="switchrow"><label for="smooth">Weiche Kontur statt gerade Segmente</label><input type="checkbox" id="smooth" checked></div></div>
+<div class="subpanel"><h3>Fünf Konturpunkte</h3><div class="editor-note">Von der oberen bis zur unteren Lampenkante. 100 % ist der gewählte Maximaldurchmesser.</div><div id="profileSliders" class="profile-sliders"></div></div>
+</div>
+
+</main>
+<section class="settings-area" id="einstellungen" aria-label="Einstellungen und Laserschnitt">
+<div class="settings-heading"><div><span class="section-kicker">KONFIGURATION &amp; PRODUKTION</span><h2>Deine Leuchte – alle Einstellungen</h2><p>Gestalte, konstruiere und exportiere deinen Entwurf. Änderungen werden automatisch in der Vorschau übernommen.</p></div><a class="jump-preview" href="#arbeitsbereich">↑ Zur 3D-Vorschau</a></div>
+<div class="settings-columns">
+
 <section class="panel"><div class="section-kicker">01 · Gestaltung</div><h2 class="section-title">Leuchtenform</h2>
 <div class="ctrl"><div class="frow"><label for="preset">Grundform</label></div><select id="preset"><option value="glocke">Glocke / organisch</option><option value="teller">Flache Scheibe / Teller</option><option value="zylinder">Zylinder</option><option value="kegel">Kegel</option><option value="sand">Sanduhr</option><option value="welle">Wellenform</option><option value="custom">Freie Form</option></select></div>
 <div class="ctrl"><div class="frow"><label for="count">Anzahl Lamellen</label><output id="countOut"></output></div><input id="count" type="range" min="8" max="48" step="1"></div>
@@ -71,23 +146,15 @@ select,input[type=number]{background:#0c1520;color:var(--text);border:1px solid 
 <div class="ctrl"><div class="frow"><label for="spacing">Teileabstand</label><output id="spacingOut"></output></div><input id="spacing" type="range" min="1" max="25" step="1"><div class="help">Echter Mindestabstand zwischen den Schnittkonturen. Die Lamellen werden ineinander verschachtelt; Änderung ordnet alle Teile neu an.</div></div>
 <div class="inputpair"><button class="btn secondary btnsmall" id="btnSave">Projekt als JSON</button><button class="btn secondary btnsmall" id="btnLoad">Projekt öffnen</button></div><input type="file" id="fileInput" accept=".json,application/json" class="hidden">
 </section>
-</aside>
-<main class="main">
-<div class="iosnotice" id="browserHelp"><b>iPhone-Hinweis:</b> Wenn du diese HTML-Datei direkt in ChatGPT/Dateien als Vorschau öffnest, können die Bedienfunktionen blockiert werden. Für die volle Funktion die Web-App über eine <b>https://-Adresse in Safari</b> öffnen. <span id="mobileStatus">JavaScript wurde noch nicht gestartet.</span></div>
-<div class="eyebrow"><div><span class="muted">ENTWURF</span><strong style="font-size:14px;margin-left:8px">Individuelle Pendelleuchte</strong></div><div class="tabbar"><button id="tab3d" class="active" type="button">3D-Modell</button><button id="tabCut" type="button">Schnittbogen</button></div></div>
-<div class="modelwrap" id="modelWrap"><canvas id="modelCanvas" aria-label="Drehbare dreidimensionale Vorschau der Lamellenleuchte"></canvas><div id="jsFallback">Die Vorschau ist hier nicht aktiv.<br><strong>Bitte die Web-App in Safari öffnen.</strong><br>Die ChatGPT-Dateivorschau führt das Zeichenprogramm nicht aus.</div><div class="viewport-caption">LIVE-VORSCHAU<b id="modelTitle">Glocke · 24 Lamellen</b></div><div class="viewport-bottom"><span id="viewportInfo">Mit dem Finger drehen · Ansicht verändern</span><div class="viewport-tools"><button type="button" id="resetView" title="Ansicht zurücksetzen">⟲</button><button type="button" id="zoomMinus" title="Verkleinern">−</button><button type="button" id="zoomPlus" title="Vergrößern">+</button></div></div></div>
-<div class="modelwrap hidden" id="cutWrap" style="height:auto;min-height:350px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center"><div id="cutMain" style="width:min(100%,740px)"></div><div class="sheetbar" style="width:min(100%,740px)"><button id="mainPrev">← Bogen zurück</button><span id="mainSheetNo"></span><button id="mainNext">Bogen weiter →</button></div></div>
-<div id="busyIndicator" aria-live="polite"></div><div class="editorwrap">
-<div class="subpanel"><h3>Lamellenkontur frei gestalten</h3><div class="editor-note" id="profileHelp">Ziehe die fünf orangefarbenen Punkte waagerecht. Die äußere Kontur wird maßstäblich gezeigt und direkt für den Zuschnitt übernommen.</div><svg id="profileSvg" class="profile-svg" viewBox="0 0 320 400" role="img" aria-label="Bearbeitbares Lamellenprofil mit fünf Ziehpunkten"><text x="20" y="50" fill="#ffca87" font-size="15">Vorschau deaktiviert:</text><text x="20" y="77" fill="#ffca87" font-size="12">Bitte die Web-App in Safari öffnen.</text></svg><div class="switchrow"><label for="smooth">Weiche Kontur statt gerade Segmente</label><input type="checkbox" id="smooth" checked></div></div>
-<div class="subpanel"><h3>Fünf Konturpunkte</h3><div class="editor-note">Von der oberen bis zur unteren Lampenkante. 100 % ist der gewählte Maximaldurchmesser.</div><div id="profileSliders" class="profile-sliders"></div></div>
-</div>
-</main>
-<aside class="right">
+
+<section class="panel"><div class="section-kicker">08 · Export</div><h2 class="section-title">Fertig für den Laser</h2><div class="exportstack"><button class="btn" id="exportAllSVG">Alle SVG-Schnittbögen als ZIP ↓</button><div class="btnrow" style="margin:0"><button class="btn secondary btnsmall" id="exportSVG">Aktueller Bogen SVG</button><button class="btn secondary btnsmall" id="exportDXF">Aktueller Bogen DXF</button></div><button class="btn secondary btnsmall" id="exportAllDXF">Alle DXF-Schnittbögen als ZIP ↓</button></div><p class="exporthint">1:1 in <b>mm</b>. Die Dateien enthalten nur geschlossene Schnittkonturen, keine Fotos oder Hilfslinien. Für die Fertigung bitte Originalgröße und Steckpassung prüfen.</p></section>
 <section class="panel"><div class="section-kicker">06 · Konstruktionsdaten</div><h2 class="section-title">Dein Entwurf</h2><div class="statgrid"><div class="stat"><div class="value" id="numParts">–</div><div class="suffix">Einzelteile</div></div><div class="stat"><div class="value" id="numSheets">–</div><div class="suffix">Schnittbögen</div></div><div class="stat"><div class="value" id="realDia">–</div><div class="suffix">Ø tatsächlich, mm</div></div><div class="stat"><div class="value" id="slotWidth">–</div><div class="suffix">Schlitzbreite, mm</div></div></div><div class="detail-list" id="details"></div><div id="warnings"></div></section>
 <section class="panel"><div class="section-kicker">07 · Zuschnitt</div><div class="frow"><h2 class="section-title" style="margin:0">Plattenbelegung</h2><span class="small muted" id="sheetLabel"></span></div><div class="cutpreview" id="cutPreview"></div><div class="sheetbar"><button type="button" id="prevSheet">←</button><span id="sheetNo"></span><button type="button" id="nextSheet">→</button></div><p class="help">Die Teile werden automatisch verteilt. Dunkle Linien zeigen die Schnittkonturen in der Vorschau. Der SVG-Laserexport bleibt rot mit 0,1 mm Strichbreite; Rahmen und Beschriftung werden nicht exportiert.</p></section>
-<section class="panel"><div class="section-kicker">08 · Export</div><h2 class="section-title">Fertig für den Laser</h2><div class="exportstack"><button class="btn" id="exportAllSVG">Alle SVG-Schnittbögen als ZIP ↓</button><div class="btnrow" style="margin:0"><button class="btn secondary btnsmall" id="exportSVG">Aktueller Bogen SVG</button><button class="btn secondary btnsmall" id="exportDXF">Aktueller Bogen DXF</button></div><button class="btn secondary btnsmall" id="exportAllDXF">Alle DXF-Schnittbögen als ZIP ↓</button></div><p class="exporthint">1:1 in <b>mm</b>. Die Dateien enthalten nur geschlossene Schnittkonturen, keine Fotos oder Hilfslinien. Für die Fertigung bitte Originalgröße und Steckpassung prüfen.</p></section>
-</aside>
+
+
+</div></section>
 </div>
+
 <footer class="footer">LAMELLA Studio · Funktionsprototyp für parametrisierte Lamellen-Stecklampen. Zwei angepasste horizontale Steckringe, oberer Ring mit integrierter Vier-Speichen-Fassungsnabe, radiale Lamellen als Vollfläche oder Konturstreifen, Laserschnitt-Daten. Die Bohrung ist eine Fassungsaussparung, keine geprüfte tragende Aufhängung. Ohne elektrotechnische Freigabe, Tragfähigkeits- oder Brandschutznachweis. Nur zugelassene Fassungen mit passender Klemmbefestigung verwenden; Werkstoff, Wärmeabstände, elektrische Sicherheit und Pendelaufhängung fachlich prüfen.</footer><div class="toast" id="toast" role="status"></div>
 <script>
 (()=>{'use strict';
@@ -110,7 +177,7 @@ const round=(x)=>Math.round(x*10000)/10000;
 function normalize(v){const o={...defaultState,...v}; for(const k of [...rangeFields,'bedW','bedH','socketHole','boltCircle','boltHoleDia']){o[k]=Number(o[k]);if(!Number.isFinite(o[k]))o[k]=defaultState[k]};o.ribWidth=clamp(o.ribWidth,15,100);if(!['outline','solid'].includes(o.ribMode))o.ribMode='outline';o.count=Math.round(clamp(o.count,8,48));o.dia=clamp(o.dia,180,800);o.height=clamp(o.height,80,650);o.inner=clamp(o.inner,40,130);o.alternate=clamp(o.alternate,60,95);o.thick=clamp(o.thick,2,8);o.clearance=clamp(o.clearance,0,.6);o.kerf=clamp(o.kerf,0,.4);o.joint=clamp(o.joint,16,36);o.ringWidth=clamp(o.ringWidth,20,42);o.spacing=clamp(o.spacing,1,25);o.socketHole=clamp(o.socketHole,10,70);o.boltCircle=clamp(o.boltCircle,36,120);o.boltHoleDia=clamp(o.boltHoleDia,2,8);o.mountHoles=[0,2,4].includes(+o.mountHoles)?+o.mountHoles:0;if(!['E14','E27','custom'].includes(o.socketType))o.socketType='E27';o.bedW=clamp(o.bedW,180,3000);o.bedH=clamp(o.bedH,180,2000);o.points=Array.isArray(o.points)&&o.points.length===5?o.points.map(x=>clamp(Number(x)||.15,.15,1)):[...defaultState.points];o.smooth=!!o.smooth; if(!(o.preset in presets))o.preset='glocke';if(!['same','alternate'].includes(o.variation))o.variation='same';return o}
 function save(){try{localStorage.setItem('lamella-studio-v1',JSON.stringify(S))}catch(e){}}
 function notify(msg){const e=$('toast');e.textContent=msg;e.classList.add('show');clearTimeout(notify.t);notify.t=setTimeout(()=>e.classList.remove('show'),3100)}
-function wireControls(){for(let k of [...rangeFields,'preset','variation','ribMode','material','bedW','bedH','socketType','socketHole','mountHoles','boltCircle','boltHoleDia']){const el=$(k);el.addEventListener(['bedW','bedH','socketHole','boltCircle','boltHoleDia'].includes(k)?'change':'input',()=>{if(k==='preset'){S.preset=el.value;if(presets[el.value]){S.points=[...presets[el.value]];if(el.value==='teller'){S.height=130;S.dia=Math.max(S.dia,400)}if(el.value==='zylinder'){S.height=340}}}else if(['variation','ribMode','material','socketType'].includes(k)){S[k]=el.value;if(k==='socketType'&&el.value!=='custom')S.socketHole=el.value==='E14'?28:40}else{S[k]=Number(el.value);if(k==='socketHole'&&((S.socketType==='E14'&&S[k]!==28)||(S.socketType==='E27'&&S[k]!==40)))S.socketType='custom'}S=normalize(S);scheduleRefresh()})} $('smooth').addEventListener('change',()=>{S.smooth=$('smooth').checked;refresh()});$('btnSave').addEventListener('click',()=>downloadText('LAMELLA_Projekt.json',JSON.stringify({app:'LAMELLA Studio',version:7,settings:S},null,2),'application/json'));$('btnLoad').addEventListener('click',()=>$('fileInput').click());$('fileInput').addEventListener('change',async(e)=>{const f=e.target.files?.[0];if(!f)return;try{const data=JSON.parse(await f.text());S=normalize(data.settings||data);refresh();notify('Projekt geladen')}catch(err){notify('Keine gültige Projektdatei')}e.target.value='' });
+function wireControls(){for(let k of [...rangeFields,'preset','variation','ribMode','material','bedW','bedH','socketType','socketHole','mountHoles','boltCircle','boltHoleDia']){const el=$(k);el.addEventListener(['bedW','bedH','socketHole','boltCircle','boltHoleDia'].includes(k)?'change':'input',()=>{if(k==='preset'){S.preset=el.value;if(presets[el.value]){S.points=[...presets[el.value]];if(el.value==='teller'){S.height=130;S.dia=Math.max(S.dia,400)}if(el.value==='zylinder'){S.height=340}}}else if(['variation','ribMode','material','socketType'].includes(k)){S[k]=el.value;if(k==='socketType'&&el.value!=='custom')S.socketHole=el.value==='E14'?28:40}else{S[k]=Number(el.value);if(k==='socketHole'&&((S.socketType==='E14'&&S[k]!==28)||(S.socketType==='E27'&&S[k]!==40)))S.socketType='custom'}S=normalize(S);scheduleRefresh()})} $('smooth').addEventListener('change',()=>{S.smooth=$('smooth').checked;refresh()});$('btnSave').addEventListener('click',()=>downloadText('LAMELLA_Projekt.json',JSON.stringify({app:'LAMELLA Studio',version:8,settings:S},null,2),'application/json'));$('btnLoad').addEventListener('click',()=>$('fileInput').click());$('fileInput').addEventListener('change',async(e)=>{const f=e.target.files?.[0];if(!f)return;try{const data=JSON.parse(await f.text());S=normalize(data.settings||data);refresh();notify('Projekt geladen')}catch(err){notify('Keine gültige Projektdatei')}e.target.value='' });
  $('tab3d').addEventListener('click',()=>setTab('3d'));$('tabCut').addEventListener('click',()=>setTab('cut'));
  $('resetView').onclick=()=>{view={yaw:.53,pitch:.27,zoom:1};draw3d()};$('zoomPlus').onclick=()=>{view.zoom=clamp(view.zoom*1.15,.55,2.4);draw3d()};$('zoomMinus').onclick=()=>{view.zoom=clamp(view.zoom/1.15,.55,2.4);draw3d()};
  const canvas=$('modelCanvas');let pointer=null;canvas.addEventListener('pointerdown',e=>{pointer={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!pointer||pointer.id!==e.pointerId)return;view.yaw+=(e.clientX-pointer.x)*.012;view.pitch=clamp(view.pitch+(e.clientY-pointer.y)*.006,-.8,1.05);pointer.x=e.clientX;pointer.y=e.clientY;draw3d()});canvas.addEventListener('pointerup',()=>pointer=null);canvas.addEventListener('pointercancel',()=>pointer=null);canvas.addEventListener('wheel',e=>{e.preventDefault();view.zoom=clamp(view.zoom*(e.deltaY>0?.93:1.07),.55,2.4);draw3d()},{passive:false});
@@ -391,7 +458,7 @@ function exportCurrent(type){if(!canExport())return;const file=`LAMELLA_Bogen_${
 const crcTab=(()=>{let t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xedb88320^(c>>>1):c>>>1;t.push(c>>>0)}return t})();
 function crc32(b){let c=0xffffffff;for(let v of b)c=crcTab[(c^v)&255]^(c>>>8);return(c^0xffffffff)>>>0}
 function zipArchive(files){const enc=new TextEncoder(),entries=[],local=[],central=[];let offset=0;function uint16(v){return[v&255,v>>>8&255]}function uint32(v){return[v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255]}for(let f of files){const name=enc.encode(f.name),data=enc.encode(f.content),crc=crc32(data);const a=new Uint8Array([...uint32(0x04034b50),...uint16(20),...uint16(0x0800),...uint16(0),...uint16(0),...uint16(0),...uint32(crc),...uint32(data.length),...uint32(data.length),...uint16(name.length),...uint16(0),...name]);local.push(a,data);const b=new Uint8Array([...uint32(0x02014b50),...uint16(20),...uint16(20),...uint16(0x0800),...uint16(0),...uint16(0),...uint16(0),...uint32(crc),...uint32(data.length),...uint32(data.length),...uint16(name.length),...uint16(0),...uint16(0),...uint16(0),...uint16(0),...uint32(0),...uint32(offset),...name]);central.push(b);offset+=a.length+data.length;entries.push(f.name)}const cdSize=central.reduce((a,b)=>a+b.length,0);const end=new Uint8Array([...uint32(0x06054b50),...uint16(0),...uint16(0),...uint16(files.length),...uint16(files.length),...uint32(cdSize),...uint32(offset),...uint16(0)]);return new Blob([...local,...central,end],{type:'application/zip'})}
-function exportZip(type){if(!canExport())return;const ext=type==='svg'?'svg':'dxf';const fs=sheets.map((_,i)=>({name:`LAMELLA_Bogen_${String(i+1).padStart(2,'0')}.${ext}`,content:type==='svg'?svgSheet(i,false):dxfSheet(i)}));fs.push({name:'FERTIGUNGSHINWEISE.txt',content:`LAMELLA Studio V6 | Fertigungsdaten\n${S.count} Lamellen | Ø maximal ${S.dia} mm | Höhe ${S.height} mm\nMaterial: ${S.material} | Materialstärke: ${S.thick} mm\nSchlitz im CAD: ${precis(slotWidth(),2)} mm | Steckspiel: ${S.clearance} mm | Schnittfuge: ${S.kerf} mm\nLamellenmodus: ${S.ribMode==='outline'?'Konturstreifen, radial '+S.ribWidth+' mm':'Vollflächig'}\nSteckringe: 2 Stück | oben mit integrierter Vier-Speichen-Nabe und Zentralbohrung, unten offen\nFassungsaufnahme: ${S.socketType} | Bohrung Durchmesser ${S.socketHole} mm | Schraubbohrungen ${S.mountHoles} Stk.\n${S.mountHoles?'Lochkreis '+S.boltCircle+' mm | Schraublochdurchmesser '+S.boltHoleDia+' mm\n':''}Lasertisch: ${S.bedW} x ${S.bedH} mm | ${sheets.length} Schnittbögen\nMindestabstand zwischen Teilen: ${S.spacing} mm | Konturbasiertes Nesting, 0°/90°/180°/270°\n\nACHTUNG: Die Bohrung ist nur eine Aufnahme für eine passende Fassung mit Klemmringen, keine geprüfte tragende Aufhängung. E14/E27 sind Richtwerte; Fassung, Gewinde und Gegenring nachmessen. 1:1-Abmessungen und Passungen zunächst mit Testschnitten überprüfen. Hitzebeständigkeit, elektrische Sicherheit, Brandverhalten und Tragfähigkeit müssen vor Nutzung durch Fachkundige geprüft werden.\n`});fs.push({name:'LAMELLA_Projekt.json',content:JSON.stringify({app:'LAMELLA Studio',version:7,settings:S},null,2)});downloadBlob(`LAMELLA_${ext.toUpperCase()}_${sheets.length}_Boegen.zip`,zipArchive(fs));notify(`ZIP mit ${sheets.length} ${ext.toUpperCase()}-Bögen erstellt`)}
+function exportZip(type){if(!canExport())return;const ext=type==='svg'?'svg':'dxf';const fs=sheets.map((_,i)=>({name:`LAMELLA_Bogen_${String(i+1).padStart(2,'0')}.${ext}`,content:type==='svg'?svgSheet(i,false):dxfSheet(i)}));fs.push({name:'FERTIGUNGSHINWEISE.txt',content:`LAMELLA Studio V6 | Fertigungsdaten\n${S.count} Lamellen | Ø maximal ${S.dia} mm | Höhe ${S.height} mm\nMaterial: ${S.material} | Materialstärke: ${S.thick} mm\nSchlitz im CAD: ${precis(slotWidth(),2)} mm | Steckspiel: ${S.clearance} mm | Schnittfuge: ${S.kerf} mm\nLamellenmodus: ${S.ribMode==='outline'?'Konturstreifen, radial '+S.ribWidth+' mm':'Vollflächig'}\nSteckringe: 2 Stück | oben mit integrierter Vier-Speichen-Nabe und Zentralbohrung, unten offen\nFassungsaufnahme: ${S.socketType} | Bohrung Durchmesser ${S.socketHole} mm | Schraubbohrungen ${S.mountHoles} Stk.\n${S.mountHoles?'Lochkreis '+S.boltCircle+' mm | Schraublochdurchmesser '+S.boltHoleDia+' mm\n':''}Lasertisch: ${S.bedW} x ${S.bedH} mm | ${sheets.length} Schnittbögen\nMindestabstand zwischen Teilen: ${S.spacing} mm | Konturbasiertes Nesting, 0°/90°/180°/270°\n\nACHTUNG: Die Bohrung ist nur eine Aufnahme für eine passende Fassung mit Klemmringen, keine geprüfte tragende Aufhängung. E14/E27 sind Richtwerte; Fassung, Gewinde und Gegenring nachmessen. 1:1-Abmessungen und Passungen zunächst mit Testschnitten überprüfen. Hitzebeständigkeit, elektrische Sicherheit, Brandverhalten und Tragfähigkeit müssen vor Nutzung durch Fachkundige geprüft werden.\n`});fs.push({name:'LAMELLA_Projekt.json',content:JSON.stringify({app:'LAMELLA Studio',version:8,settings:S},null,2)});downloadBlob(`LAMELLA_${ext.toUpperCase()}_${sheets.length}_Boegen.zip`,zipArchive(fs));notify(`ZIP mit ${sheets.length} ${ext.toUpperCase()}-Bögen erstellt`)}
 function canExport(){if(!sheets.length||issues.some(x=>x.error)){notify('Bitte erst die Hinweise zur Geometrie / Plattengröße beheben');return false}return true}
 function setTab(v){tab=v;$('modelWrap').classList.toggle('hidden',v!=='3d');$('cutWrap').classList.toggle('hidden',v!=='cut');$('tab3d').classList.toggle('active',v==='3d');$('tabCut').classList.toggle('active',v==='cut');if(v==='cut')renderSheetView();else requestAnimationFrame(draw3d)}
 function changeSheet(delta){sheetIndex=clamp(sheetIndex+delta,0,Math.max(0,sheets.length-1));renderSheetView()}
